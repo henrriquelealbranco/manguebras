@@ -1,0 +1,297 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ============================================================
+   MANGUEBRAS DESIGN SYSTEM
+   Cores oficiais extraídas do logotipo:
+   - Verde profundo  #0A3B34  (brand-900)
+   - Verde teal      #0D665D  (brand-600)
+   ============================================================ */
+
+@theme {
+  /* ---------- Brand — escala verde Manguebras ---------- */
+  --color-brand-50: #f0faf7;
+  --color-brand-100: #d9f2eb;
+  --color-brand-200: #b0e4d7;
+  --color-brand-300: #7ecfbd;
+  --color-brand-400: #4ab3a0;
+  --color-brand-500: #1c9484;
+  --color-brand-600: #0d665d; /* verde teal do logo */
+  --color-brand-700: #0b554e;
+  --color-brand-800: #0a463f;
+  --color-brand-900: #0a3b34; /* verde profundo do logo */
+  --color-brand-950: #05221e;
+
+  /* ---------- Accent — verde vibrante (CTAs, badges) ---------- */
+  --color-accent-300: #5eead4;
+  --color-accent-400: #2cc4af;
+  --color-accent-500: #16ad98;
+  --color-accent-600: #0e9483;
+
+  /* ---------- Graphite — neutros ---------- */
+  --color-graphite-50: #fafafa;
+  --color-graphite-100: #f4f4f5;
+  --color-graphite-200: #e4e4e7;
+  --color-graphite-300: #d4d4d8;
+  --color-graphite-400: #a1a1aa;
+  --color-graphite-500: #71717a;
+  --color-graphite-600: #52525b;
+  --color-graphite-700: #3f3f46;
+  --color-graphite-800: #27272a;
+  --color-graphite-900: #18181b;
+  --color-graphite-950: #09090b;
+
+  /* ---------- Tipografia ---------- */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-montserrat), var(--font-inter), ui-sans-serif,
+    system-ui, sans-serif;
+
+  /* ---------- Sombras elegantes (3 níveis) ---------- */
+  --shadow-soft: 0 1px 2px 0 rgb(10 59 52 / 0.04),
+    0 1px 3px 0 rgb(10 59 52 / 0.06);
+  --shadow-card: 0 2px 8px -2px rgb(10 59 52 / 0.08),
+    0 4px 16px -4px rgb(10 59 52 / 0.06);
+  --shadow-elevated: 0 8px 24px -6px rgb(10 59 52 / 0.12),
+    0 16px 48px -8px rgb(10 59 52 / 0.1);
+
+  /* ---------- Animações ---------- */
+  --animate-fade-in: fade-in 0.5s ease-out both;
+  --animate-fade-up: fade-up 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-scale-in: scale-in 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-marquee: marquee 40s linear infinite;
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes scale-in {
+    from {
+      opacity: 0;
+      transform: scale(0.96);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+}
+
+/* ============================================================
+   Variáveis semânticas (shadcn/ui) mapeadas para a marca
+   ============================================================ */
+
+:root {
+  --radius: 0.75rem;
+
+  --background: #ffffff;
+  --foreground: #18181b;
+
+  --card: #ffffff;
+  --card-foreground: #18181b;
+
+  --popover: #ffffff;
+  --popover-foreground: #18181b;
+
+  --primary: #0a3b34;
+  --primary-foreground: #f0faf7;
+
+  --secondary: #f0faf7;
+  --secondary-foreground: #0a3b34;
+
+  --muted: #f4f4f5;
+  --muted-foreground: #71717a;
+
+  --accent: #d9f2eb;
+  --accent-foreground: #0a3b34;
+
+  --destructive: #dc2626;
+  --destructive-foreground: #ffffff;
+
+  --border: #e4e4e7;
+  --input: #e4e4e7;
+  --ring: #16ad98;
+}
+
+.dark {
+  --background: #05221e;
+  --foreground: #f0faf7;
+
+  --card: #0a3b34;
+  --card-foreground: #f0faf7;
+
+  --popover: #0a3b34;
+  --popover-foreground: #f0faf7;
+
+  --primary: #2cc4af;
+  --primary-foreground: #05221e;
+
+  --secondary: #0a463f;
+  --secondary-foreground: #f0faf7;
+
+  --muted: #0a463f;
+  --muted-foreground: #7ecfbd;
+
+  --accent: #0b554e;
+  --accent-foreground: #f0faf7;
+
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+
+  --border: #0b554e;
+  --input: #0b554e;
+  --ring: #2cc4af;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+/* ============================================================
+   Base
+   ============================================================ */
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-display tracking-tight;
+    text-wrap: balance;
+  }
+
+  ::selection {
+    @apply bg-brand-600 text-white;
+  }
+
+  /* Scroll bonito */
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-graphite-300 rounded-full;
+    border: 2px solid transparent;
+    background-clip: content-box;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-brand-400;
+  }
+
+  /* Acessibilidade — foco visível por teclado */
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-ring;
+  }
+
+  /* Respeita usuários que preferem menos movimento */
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+/* ============================================================
+   Utilitários do projeto
+   ============================================================ */
+
+@utility container-page {
+  @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+}
+
+@utility section-padding {
+  @apply py-16 md:py-24 lg:py-32;
+}
+
+@utility glass {
+  @apply bg-white/70 backdrop-blur-xl backdrop-saturate-150;
+}
+
+@utility glass-dark {
+  @apply bg-brand-950/70 backdrop-blur-xl backdrop-saturate-150;
+}
+
+@utility scrollbar-none {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@utility text-gradient-brand {
+  background: linear-gradient(135deg, #0a3b34 0%, #16ad98 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
