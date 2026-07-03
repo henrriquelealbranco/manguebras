@@ -144,7 +144,7 @@ export function Hero() {
       <div className="container-page relative grid min-h-[480px] items-center gap-10 py-14 lg:grid-cols-[1.1fr_1fr_320px] lg:py-16">
         {/* Texto */}
         <div className="relative z-10">
-          <AnimatePresence mode="wait">
+          <AnimatePresence mode="wait" initial={false}>
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 24 }}
@@ -182,7 +182,7 @@ export function Hero() {
 
         {/* Produto em destaque */}
         <div className="relative z-10 flex items-center justify-center">
-          <AnimatePresence mode="wait">
+          <AnimatePresence mode="wait" initial={false}>
             <motion.div
               key={index}
               initial={{ opacity: 0, scale: 0.92, x: 32 }}
