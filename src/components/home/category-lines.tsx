@@ -46,7 +46,7 @@ export function CategoryLines() {
             <Reveal key={card.title} delay={i * 0.07}>
             <Link
               href={card.href}
-              className="group relative overflow-hidden rounded-xl border border-white/10 bg-white/[0.04] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-accent-400/50 hover:bg-white/[0.07] hover:shadow-elevated"
+              className="group relative overflow-hidden rounded-md border border-white/10 bg-white/[0.04] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-accent-400/50 hover:bg-white/[0.07] hover:shadow-elevated"
             >
               <div
                 aria-hidden

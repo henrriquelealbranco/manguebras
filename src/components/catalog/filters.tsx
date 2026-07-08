@@ -285,8 +285,6 @@ export function SortSelect({ current }: { current: string }) {
         className="h-10 cursor-pointer rounded-lg border border-graphite-300 bg-white px-3 text-sm font-semibold text-graphite-800 outline-none transition-colors hover:border-brand-400 focus:border-accent-500 disabled:opacity-60"
       >
         <option value="relevancia">Relevância</option>
-        <option value="menor-preco">Menor preço</option>
-        <option value="maior-preco">Maior preço</option>
         <option value="a-z">Nome (A–Z)</option>
         <option value="novidades">Novidades</option>
       </select>

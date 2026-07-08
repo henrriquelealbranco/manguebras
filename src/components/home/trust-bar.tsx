@@ -1,6 +1,6 @@
 import {
+  Boxes,
   Headset,
-  Lock,
   ShieldCheck,
   Truck,
   type LucideIcon,
@@ -21,18 +21,18 @@ const TRUST_ITEMS: TrustItem[] = [
   },
   {
     icon: Truck,
-    title: "Envio rápido",
-    text: "Agilidade na entrega para todo o Brasil.",
+    title: "Distribuição nacional",
+    text: "Atendemos oficinas, autopeças e frotas em todo o Brasil.",
+  },
+  {
+    icon: Boxes,
+    title: "Catálogo completo",
+    text: "Milhares de itens da linha diesel em um só lugar.",
   },
   {
     icon: Headset,
     title: "Atendimento especializado",
-    text: "Nossa equipe entende do que você precisa.",
-  },
-  {
-    icon: Lock,
-    title: "Compra segura",
-    text: "Ambiente 100% seguro para suas compras.",
+    text: "Nossa equipe identifica a peça certa para você.",
   },
 ];
 
@@ -49,7 +49,7 @@ export function TrustBar() {
       {TRUST_ITEMS.map((item, i) => (
         <Reveal key={item.title} delay={i * 0.06}>
         <div className="flex items-start gap-4">
-          <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-brand-600/30 text-brand-700">
+          <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-md border border-brand-600/30 text-brand-700">
             <item.icon className="h-5 w-5" />
           </span>
           <div>

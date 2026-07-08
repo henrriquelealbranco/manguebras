@@ -1,12 +1,11 @@
 import Link from "next/link";
 import {
+  Boxes,
   Clock,
-  CreditCard,
   Mail,
   MapPin,
   MessageCircle,
   Phone,
-  QrCode,
   ShieldCheck,
   Truck,
 } from "lucide-react";
@@ -46,7 +45,7 @@ export function Footer() {
       <div className="relative border-b border-white/10">
         <div className="container-page grid gap-6 py-10 sm:grid-cols-3">
           <div className="flex items-center gap-3">
-            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-white/10">
+            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-md bg-white/10">
               <Truck className="h-5 w-5 text-accent-400" />
             </span>
             <div>
@@ -59,7 +58,7 @@ export function Footer() {
             </div>
           </div>
           <div className="flex items-center gap-3">
-            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-white/10">
+            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-md bg-white/10">
               <ShieldCheck className="h-5 w-5 text-accent-400" />
             </span>
             <div>
@@ -72,7 +71,7 @@ export function Footer() {
             </div>
           </div>
           <div className="flex items-center gap-3">
-            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-white/10">
+            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-md bg-white/10">
               <MessageCircle className="h-5 w-5 text-accent-400" />
             </span>
             <div>
@@ -207,14 +206,10 @@ export function Footer() {
             © {new Date().getFullYear()} {SITE.name}® — {SITE.tagline}. Todos
             os direitos reservados.
           </p>
-          <div className="flex items-center gap-4">
-            <span className="flex items-center gap-1.5">
-              <QrCode className="h-4 w-4" /> Pix
-            </span>
-            <span className="flex items-center gap-1.5">
-              <CreditCard className="h-4 w-4" /> Cartão em até 12x
-            </span>
-          </div>
+          <p className="flex items-center gap-1.5 text-brand-300">
+            <Boxes className="h-4 w-4 text-accent-400" />
+            Catálogo virtual · Distribuidor da linha diesel
+          </p>
         </div>
       </div>
     </footer>

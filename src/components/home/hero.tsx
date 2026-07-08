@@ -171,7 +171,7 @@ export function Hero() {
               </p>
               <Link
                 href={slide.href}
-                className="group mt-7 inline-flex items-center gap-2.5 rounded-lg bg-accent-500 px-6 py-3.5 text-xs font-bold uppercase tracking-widest text-white shadow-elevated transition-all duration-300 hover:scale-[1.02] hover:bg-accent-600"
+                className="group mt-7 inline-flex items-center gap-2.5 rounded-lg bg-action-500 px-6 py-3.5 text-xs font-bold uppercase tracking-widest text-white shadow-elevated transition-all duration-300 hover:scale-[1.02] hover:bg-action-600 active:bg-action-700"
               >
                 Ver produtos
                 <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
@@ -192,7 +192,7 @@ export function Hero() {
               className={cn(
                 "relative",
                 slide.display === "card" &&
-                  "rounded-3xl bg-white p-6 shadow-elevated ring-1 ring-white/20",
+                  "rounded-lg bg-white p-6 shadow-elevated ring-1 ring-white/20",
               )}
             >
               <Image

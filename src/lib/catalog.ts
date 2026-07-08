@@ -2,12 +2,7 @@ import { PRODUCTS } from "@/data/products";
 import { getCategory } from "@/data/categories";
 import type { CategorySlug, Product, ProductLine } from "@/types/product";
 
-export type SortKey =
-  | "relevancia"
-  | "menor-preco"
-  | "maior-preco"
-  | "a-z"
-  | "novidades";
+export type SortKey = "relevancia" | "a-z" | "novidades";
 
 export interface CatalogQuery {
   q?: string;
@@ -18,8 +13,6 @@ export interface CatalogQuery {
 
 export const SORT_OPTIONS: { value: SortKey; label: string }[] = [
   { value: "relevancia", label: "Relevância" },
-  { value: "menor-preco", label: "Menor preço" },
-  { value: "maior-preco", label: "Maior preço" },
   { value: "a-z", label: "Nome (A–Z)" },
   { value: "novidades", label: "Novidades" },
 ];
@@ -86,12 +79,6 @@ function matchesQuery(product: Product, q: string): boolean {
 function sortProducts(products: Product[], sort: SortKey): Product[] {
   const sorted = [...products];
   switch (sort) {
-    case "menor-preco":
-      return sorted.sort(
-        (a, b) => (a.priceCents ?? Infinity) - (b.priceCents ?? Infinity),
-      );
-    case "maior-preco":
-      return sorted.sort((a, b) => (b.priceCents ?? 0) - (a.priceCents ?? 0));
     case "a-z":
       return sorted.sort((a, b) => a.name.localeCompare(b.name, "pt-BR"));
     case "novidades":

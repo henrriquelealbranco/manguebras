@@ -4,8 +4,8 @@ export interface FaqItem {
 }
 
 /**
- * Perguntas frequentes — baseadas nas dores reais do cliente
- * (identificação por amostra, prazo, pagamento, trocas).
+ * Perguntas frequentes — contexto de CATÁLOGO VIRTUAL / distribuidor
+ * (identificação de peça, como comprar via revenda, atendimento).
  */
 export const FAQ_ITEMS: FaqItem[] = [
   {
@@ -14,27 +14,27 @@ export const FAQ_ITEMS: FaqItem[] = [
       "É a nossa especialidade! Envie uma foto da mangueira (mesmo adaptada ou danificada) pelo WhatsApp, junto com o modelo do caminhão. Nossa equipe identifica a peça original ou uma similar compatível no nosso catálogo com milhares de itens.",
   },
   {
-    question: "Vocês entregam em todo o Brasil?",
+    question: "O site vende online? Como faço para comprar?",
     answer:
-      "Sim! Enviamos para todos os estados por transportadora ou Correios. O frete e o prazo são confirmados no fechamento do pedido, de acordo com o CEP e o volume da compra.",
+      "O site é um catálogo virtual de apresentação — não vendemos diretamente pela internet. Para adquirir, fale com nossa equipe pelo WhatsApp ou telefone: indicamos preço, disponibilidade e a melhor forma de atendimento para o seu caso.",
   },
   {
-    question: "Quais são as formas de pagamento?",
+    question: "Por que os preços não aparecem no site?",
     answer:
-      "Aceitamos Pix (aprovação imediata), cartão de crédito em até 6x sem juros e condições especiais para compras recorrentes de oficinas, autopeças e frotas. Fale com nossa equipe para abrir seu cadastro.",
+      "A Manguebras é distribuidora e trabalha com a rede de autopeças. Por isso o catálogo é de consulta: os valores e condições são passados diretamente pela nossa equipe, de acordo com o perfil de cada cliente.",
   },
   {
-    question: "Preciso ter CNPJ para comprar?",
+    question: "Sou lojista/autopeça. Como me torno cliente da Manguebras?",
     answer:
-      "Não. Atendemos tanto pessoa física quanto jurídica. Para oficinas, autopeças, transportadoras e frotas, oferecemos condições e prazos diferenciados.",
+      "Atendemos oficinas, autopeças, transportadoras e frotas com condições de distribuidor. Fale com um representante pelo WhatsApp e apresente seu negócio — montamos o atendimento ideal para a sua demanda.",
   },
   {
-    question: "A peça não serviu. Como funciona a troca?",
+    question: "Vocês atendem em todo o Brasil?",
     answer:
-      "Você tem até 7 dias após o recebimento para solicitar troca ou devolução de produtos sem uso, na embalagem original. Confira todos os detalhes na nossa Política de Troca ou fale direto com a equipe no WhatsApp.",
+      "Sim. Fazemos distribuição para todos os estados. Prazos e logística são combinados com nossa equipe conforme a região e o volume.",
   },
   {
-    question: "Vocês vendem mangueiras para outras aplicações além de caminhões?",
+    question: "Trabalham com outras linhas além da diesel?",
     answer:
       "Sim. Além da linha de arrefecimento diesel — nossa especialidade — atendemos as linhas leve, pesada, agrícola e industrial, com mangueiras, abraçadeiras, juntas e acessórios.",
   },

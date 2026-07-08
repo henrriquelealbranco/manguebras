@@ -126,7 +126,7 @@ export default async function ProdutosPage({ searchParams }: PageProps) {
       <div className="container-page grid gap-8 py-10 lg:grid-cols-[260px_1fr]">
         {/* Sidebar de filtros (desktop) */}
         <aside className="hidden lg:block" aria-label="Filtros">
-          <div className="sticky top-16 rounded-2xl border border-graphite-200 bg-white p-5 shadow-soft">
+          <div className="sticky top-16 rounded-lg border border-graphite-200 bg-white p-5 shadow-soft">
             <FilterPanel active={active} />
           </div>
         </aside>
@@ -163,8 +163,8 @@ export default async function ProdutosPage({ searchParams }: PageProps) {
             </ul>
           ) : (
             /* Estado vazio — canaliza para o WhatsApp (dor nº 1 do cliente) */
-            <div className="mt-10 flex flex-col items-center gap-5 rounded-3xl border border-dashed border-graphite-300 bg-graphite-50/60 px-8 py-16 text-center">
-              <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-brand-100 text-brand-700">
+            <div className="mt-10 flex flex-col items-center gap-5 rounded-lg border border-dashed border-graphite-300 bg-graphite-50/60 px-8 py-16 text-center">
+              <span className="flex h-14 w-14 items-center justify-center rounded-lg bg-brand-100 text-brand-700">
                 <PackageSearch className="h-7 w-7" />
               </span>
               <div>
@@ -183,7 +183,7 @@ export default async function ProdutosPage({ searchParams }: PageProps) {
                 )}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-lg bg-accent-500 px-6 py-3 text-xs font-bold uppercase tracking-widest text-white transition-all duration-300 hover:scale-[1.02] hover:bg-accent-600"
+                className="inline-flex items-center gap-2 rounded-lg bg-action-500 px-6 py-3 text-xs font-bold uppercase tracking-widest text-white transition-all duration-300 hover:scale-[1.02] hover:bg-action-600 active:bg-action-700"
               >
                 <MessageCircle className="h-4 w-4" />
                 Falar com especialista

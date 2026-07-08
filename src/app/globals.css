@@ -24,11 +24,19 @@
   --color-brand-900: #0a3b34; /* verde profundo do logo */
   --color-brand-950: #05221e;
 
-  /* ---------- Accent — verde vibrante (CTAs, badges) ---------- */
+  /* ---------- Accent — verde vibrante (destaques de texto, badges) ---------- */
   --color-accent-300: #5eead4;
   --color-accent-400: #2cc4af;
   --color-accent-500: #16ad98;
   --color-accent-600: #0e9483;
+
+  /* ---------- Action — vermelho industrial (CTAs de conversão) ---------- */
+  --color-action-50: #fdecec;
+  --color-action-100: #fbd5d5;
+  --color-action-400: #e3453f;
+  --color-action-500: #cc2027; /* CTA primário */
+  --color-action-600: #ab1a20; /* hover */
+  --color-action-700: #86141a; /* active */
 
   /* ---------- Graphite — neutros ---------- */
   --color-graphite-50: #fafafa;
@@ -48,13 +56,13 @@
   --font-display: var(--font-montserrat), var(--font-inter), ui-sans-serif,
     system-ui, sans-serif;
 
-  /* ---------- Sombras elegantes (3 níveis) ---------- */
-  --shadow-soft: 0 1px 2px 0 rgb(10 59 52 / 0.04),
-    0 1px 3px 0 rgb(10 59 52 / 0.06);
-  --shadow-card: 0 2px 8px -2px rgb(10 59 52 / 0.08),
-    0 4px 16px -4px rgb(10 59 52 / 0.06);
-  --shadow-elevated: 0 8px 24px -6px rgb(10 59 52 / 0.12),
-    0 16px 48px -8px rgb(10 59 52 / 0.1);
+  /* ---------- Sombras nítidas (industrial — definidas, pouco blur) ---------- */
+  --shadow-soft: 0 1px 0 0 rgb(10 59 52 / 0.05),
+    0 1px 2px 0 rgb(10 59 52 / 0.08);
+  --shadow-card: 0 1px 0 0 rgb(10 59 52 / 0.06),
+    0 4px 10px -2px rgb(10 59 52 / 0.14);
+  --shadow-elevated: 0 2px 0 0 rgb(10 59 52 / 0.06),
+    0 12px 28px -6px rgb(10 59 52 / 0.22);
 
   /* ---------- Animações ---------- */
   --animate-fade-in: fade-in 0.5s ease-out both;
@@ -105,7 +113,7 @@
    ============================================================ */
 
 :root {
-  --radius: 0.75rem;
+  --radius: 0.375rem;
 
   --background: #ffffff;
   --foreground: #18181b;

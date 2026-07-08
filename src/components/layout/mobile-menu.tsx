@@ -58,7 +58,7 @@ export function MobileMenu() {
           <Link
             href="/busca"
             onClick={() => setOpen(false)}
-            className="mb-4 flex items-center gap-3 rounded-xl border border-graphite-200 bg-graphite-50 px-4 py-3 text-sm text-graphite-500"
+            className="mb-4 flex items-center gap-3 rounded-md border border-graphite-200 bg-graphite-50 px-4 py-3 text-sm text-graphite-500"
           >
             <Search className="h-4 w-4" />
             Buscar produtos…
@@ -119,7 +119,7 @@ export function MobileMenu() {
             )}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center gap-2 rounded-xl bg-accent-500 px-4 py-3 text-sm font-semibold text-white transition-colors hover:bg-accent-600"
+            className="flex items-center justify-center gap-2 rounded-sm bg-action-500 px-4 py-3 text-sm font-semibold text-white transition-colors hover:bg-action-600 active:bg-action-700"
           >
             <MessageCircle className="h-4 w-4" />
             Falar no WhatsApp

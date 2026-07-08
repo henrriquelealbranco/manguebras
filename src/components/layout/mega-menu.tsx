@@ -113,7 +113,7 @@ export function CategoriesMenu() {
                     <Link
                       href={`/produtos?categoria=${category.slug}`}
                       onClick={() => setOpen(false)}
-                      className="group flex items-start gap-3 rounded-xl p-3 transition-colors hover:bg-brand-50"
+                      className="group flex items-start gap-3 rounded-md p-3 transition-colors hover:bg-brand-50"
                     >
                       <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-brand-100 text-brand-700 transition-colors group-hover:bg-brand-600 group-hover:text-white">
                         <Icon className="h-5 w-5" />
@@ -134,7 +134,7 @@ export function CategoriesMenu() {
           </nav>
 
           {/* CTA lateral — dor nº 1 do cliente */}
-          <aside className="relative hidden overflow-hidden rounded-2xl bg-brand-950 p-6 lg:flex lg:flex-col lg:justify-between">
+          <aside className="relative hidden overflow-hidden rounded-lg bg-brand-950 p-6 lg:flex lg:flex-col lg:justify-between">
             <div
               aria-hidden
               className="pointer-events-none absolute inset-0 opacity-50"
@@ -157,7 +157,7 @@ export function CategoriesMenu() {
               )}
               target="_blank"
               rel="noopener noreferrer"
-              className="relative mt-6 inline-flex items-center justify-center gap-2 rounded-xl bg-accent-500 px-4 py-3 text-sm font-semibold text-white transition-all duration-300 hover:bg-accent-600 hover:shadow-elevated"
+              className="relative mt-6 inline-flex items-center justify-center gap-2 rounded-sm bg-action-500 px-4 py-3 text-sm font-semibold text-white transition-all duration-200 hover:bg-action-600 active:bg-action-700 hover:shadow-elevated"
             >
               <MessageCircle className="h-4 w-4" />
               Falar com especialista

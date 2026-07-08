@@ -97,7 +97,7 @@ export default function SobrePage() {
           ].map((stat) => (
             <div
               key={stat.label}
-              className="rounded-2xl border border-graphite-200 bg-graphite-50/60 p-6 text-center shadow-soft"
+              className="rounded-lg border border-graphite-200 bg-graphite-50/60 p-6 text-center shadow-soft"
             >
               <dd className="font-display text-4xl font-black text-brand-900">
                 <CountUp value={stat.value} suffix={stat.suffix} />
@@ -121,7 +121,7 @@ export default function SobrePage() {
           }}
         />
         <div className="container-page relative grid gap-4 py-14 md:grid-cols-2">
-          <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-7">
+          <div className="rounded-lg border border-white/10 bg-white/[0.04] p-7">
             <span className="flex h-12 w-12 items-center justify-center rounded-full border border-accent-400/50 text-accent-400">
               <Target className="h-5 w-5" />
             </span>
@@ -133,7 +133,7 @@ export default function SobrePage() {
               certo, com atendimento que entende do assunto.
             </p>
           </div>
-          <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-7">
+          <div className="rounded-lg border border-white/10 bg-white/[0.04] p-7">
             <span className="flex h-12 w-12 items-center justify-center rounded-full border border-accent-400/50 text-accent-400">
               <Eye className="h-5 w-5" />
             </span>
@@ -157,9 +157,9 @@ export default function SobrePage() {
           {VALORES.map((valor) => (
             <div
               key={valor.title}
-              className="rounded-2xl border border-graphite-200 bg-white p-6 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-card"
+              className="rounded-lg border border-graphite-200 bg-white p-6 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-card"
             >
-              <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-100 text-brand-700">
+              <span className="flex h-12 w-12 items-center justify-center rounded-md bg-brand-100 text-brand-700">
                 <valor.icon className="h-5 w-5" />
               </span>
               <h3 className="mt-4 text-sm font-bold uppercase tracking-wide text-graphite-900">
@@ -172,7 +172,7 @@ export default function SobrePage() {
           ))}
         </div>
 
-        <div className="mt-10 flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-brand-200 bg-brand-50 p-6">
+        <div className="mt-10 flex flex-wrap items-center justify-between gap-4 rounded-lg border border-brand-200 bg-brand-50 p-6">
           <div className="flex items-center gap-3">
             <Compass className="h-6 w-6 text-brand-700" />
             <p className="text-sm font-semibold text-brand-900">

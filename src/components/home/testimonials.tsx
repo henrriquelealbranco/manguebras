@@ -41,7 +41,7 @@ export function Testimonials() {
           {TESTIMONIALS.map((t, i) => (
             <Reveal key={t.name} delay={i * 0.08} className="h-full">
             <figure
-              className="relative flex h-full flex-col rounded-2xl border border-graphite-200 bg-graphite-50/50 p-6 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-card"
+              className="relative flex h-full flex-col rounded-lg border border-graphite-200 bg-graphite-50/50 p-6 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-card"
             >
               <Quote
                 aria-hidden

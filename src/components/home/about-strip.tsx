@@ -57,7 +57,7 @@ export function AboutStrip() {
           {STATS.map((stat, i) => (
             <Reveal key={stat.label} delay={0.1 + i * 0.07}>
             <div
-              className="rounded-2xl border border-white/10 bg-white/[0.04] p-6 text-center"
+              className="rounded-lg border border-white/10 bg-white/[0.04] p-6 text-center"
             >
               <dt className="order-2 mt-1 block text-xs font-semibold uppercase tracking-wide text-brand-300">
                 {stat.label}

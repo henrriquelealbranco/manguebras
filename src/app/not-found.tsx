@@ -14,7 +14,7 @@ export default function NotFound() {
         }}
       />
       <div className="container-page relative flex min-h-[60vh] flex-col items-center justify-center gap-6 py-20 text-center">
-        <span className="flex h-16 w-16 items-center justify-center rounded-2xl border border-accent-400/40 text-accent-400">
+        <span className="flex h-16 w-16 items-center justify-center rounded-lg border border-accent-400/40 text-accent-400">
           <SearchX className="h-8 w-8" />
         </span>
         <div>
@@ -30,7 +30,7 @@ export default function NotFound() {
         <div className="flex flex-wrap items-center justify-center gap-3">
           <Link
             href="/produtos"
-            className="group inline-flex items-center gap-2 rounded-lg bg-accent-500 px-6 py-3.5 text-xs font-bold uppercase tracking-widest text-white transition-all duration-300 hover:scale-[1.02] hover:bg-accent-600"
+            className="group inline-flex items-center gap-2 rounded-lg bg-action-500 px-6 py-3.5 text-xs font-bold uppercase tracking-widest text-white transition-all duration-300 hover:scale-[1.02] hover:bg-action-600 active:bg-action-700"
           >
             Ver catálogo
             <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />

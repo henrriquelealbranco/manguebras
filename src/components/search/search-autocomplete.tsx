@@ -6,7 +6,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { Search } from "lucide-react";
 import { CATEGORIES } from "@/data/categories";
 import { PRODUCTS } from "@/data/products";
-import { formatBRL, cn } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 import type { Product } from "@/types/product";
 
 const MAX_RESULTS = 6;
@@ -141,7 +141,7 @@ export function SearchAutocomplete() {
         <ul
           role="listbox"
           aria-label="Sugestões de produtos"
-          className="absolute left-0 right-0 top-full z-50 mt-2 overflow-hidden rounded-xl border border-graphite-200 bg-white shadow-elevated"
+          className="absolute left-0 right-0 top-full z-50 mt-2 overflow-hidden rounded-md border border-graphite-200 bg-white shadow-elevated"
         >
           {results.map((product, i) => (
             <li key={product.code} role="option" aria-selected={i === highlighted}>
@@ -171,10 +171,8 @@ export function SearchAutocomplete() {
                     Cód. {product.code}
                   </span>
                 </span>
-                <span className="shrink-0 text-sm font-bold text-accent-600">
-                  {product.priceCents
-                    ? formatBRL(product.priceCents)
-                    : "Sob orçamento"}
+                <span className="shrink-0 text-[11px] font-bold uppercase tracking-widest text-brand-600">
+                  Ver ficha →
                 </span>
               </button>
             </li>

@@ -18,38 +18,38 @@ export default function PrivacidadePage() {
         description="Seus dados tratados com respeito, conforme a LGPD."
       />
       <div className="container-page max-w-3xl space-y-8 py-12 text-sm leading-relaxed text-graphite-600">
-        <section className="rounded-2xl border border-graphite-200 bg-white p-7 shadow-soft">
+        <section className="rounded-lg border border-graphite-200 bg-white p-7 shadow-soft">
           <h2 className="font-display text-base font-bold uppercase tracking-wide text-brand-900">
             1. Dados que coletamos
           </h2>
           <p className="mt-3">
-            Coletamos apenas os dados necessários para atender seu pedido: nome,
-            e-mail, telefone, CPF/CNPJ (para nota fiscal) e endereço de entrega.
-            Os itens do carrinho ficam armazenados apenas no seu navegador
-            (localStorage) — não em nossos servidores.
+            Coletamos apenas os dados que você nos envia ao entrar em contato
+            (por WhatsApp, telefone, e-mail ou formulário): nome, telefone,
+            e-mail e as informações da peça ou solicitação. O site é um catálogo
+            de consulta e não realiza vendas nem pagamentos online.
           </p>
         </section>
 
-        <section className="rounded-2xl border border-graphite-200 bg-white p-7 shadow-soft">
+        <section className="rounded-lg border border-graphite-200 bg-white p-7 shadow-soft">
           <h2 className="font-display text-base font-bold uppercase tracking-wide text-brand-900">
             2. Como usamos
           </h2>
           <ul className="mt-3 list-disc space-y-2 pl-5">
-            <li>Processar pedidos, entregas e emissão de notas fiscais;</li>
-            <li>Responder solicitações de orçamento e atendimento;</li>
+            <li>Responder consultas, orçamentos e atendimento comercial;</li>
+            <li>Identificar a peça certa e indicar disponibilidade;</li>
             <li>
               Melhorar a experiência do site por meio de métricas de navegação
               (quando ferramentas de análise estiverem ativas, sempre de forma
               agregada);
             </li>
             <li>
-              Comunicações sobre pedidos — não enviamos marketing sem seu
-              consentimento.
+              Comunicações sobre sua solicitação — não enviamos marketing sem
+              seu consentimento.
             </li>
           </ul>
         </section>
 
-        <section className="rounded-2xl border border-graphite-200 bg-white p-7 shadow-soft">
+        <section className="rounded-lg border border-graphite-200 bg-white p-7 shadow-soft">
           <h2 className="font-display text-base font-bold uppercase tracking-wide text-brand-900">
             3. Compartilhamento
           </h2>
@@ -61,7 +61,7 @@ export default function PrivacidadePage() {
           </p>
         </section>
 
-        <section className="rounded-2xl border border-graphite-200 bg-white p-7 shadow-soft">
+        <section className="rounded-lg border border-graphite-200 bg-white p-7 shadow-soft">
           <h2 className="font-display text-base font-bold uppercase tracking-wide text-brand-900">
             4. Seus direitos (LGPD)
           </h2>
@@ -72,7 +72,7 @@ export default function PrivacidadePage() {
           </p>
         </section>
 
-        <section className="rounded-2xl border border-graphite-200 bg-white p-7 shadow-soft">
+        <section className="rounded-lg border border-graphite-200 bg-white p-7 shadow-soft">
           <h2 className="font-display text-base font-bold uppercase tracking-wide text-brand-900">
             5. Contato do responsável
           </h2>

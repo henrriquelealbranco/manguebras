@@ -17,7 +17,7 @@ export default function TermosPage() {
         description="Condições para navegação e compra no site."
       />
       <div className="container-page max-w-3xl space-y-8 py-12 text-sm leading-relaxed text-graphite-600">
-        <section className="rounded-2xl border border-graphite-200 bg-white p-7 shadow-soft">
+        <section className="rounded-lg border border-graphite-200 bg-white p-7 shadow-soft">
           <h2 className="font-display text-base font-bold uppercase tracking-wide text-brand-900">
             1. Sobre o site
           </h2>
@@ -29,31 +29,32 @@ export default function TermosPage() {
           </p>
         </section>
 
-        <section className="rounded-2xl border border-graphite-200 bg-white p-7 shadow-soft">
+        <section className="rounded-lg border border-graphite-200 bg-white p-7 shadow-soft">
           <h2 className="font-display text-base font-bold uppercase tracking-wide text-brand-900">
-            2. Produtos, preços e estoque
+            2. Catálogo, imagens e disponibilidade
           </h2>
           <p className="mt-3">
-            As imagens dos produtos são reais, mas podem variar em tonalidade
-            conforme o monitor. Preços e disponibilidade podem ser alterados sem
-            aviso prévio; o valor válido é sempre o confirmado no fechamento do
-            pedido. Produtos "sob orçamento" têm preço confirmado pela equipe
-            conforme a aplicação.
+            Este site é um <strong>catálogo virtual de apresentação</strong> e
+            não realiza vendas nem pagamentos online. As imagens dos produtos são
+            reais, mas podem variar em tonalidade conforme o monitor.
+            Disponibilidade e informações comerciais podem ser alteradas sem
+            aviso prévio e são confirmadas diretamente pela nossa equipe.
           </p>
         </section>
 
-        <section className="rounded-2xl border border-graphite-200 bg-white p-7 shadow-soft">
+        <section className="rounded-lg border border-graphite-200 bg-white p-7 shadow-soft">
           <h2 className="font-display text-base font-bold uppercase tracking-wide text-brand-900">
-            3. Pedidos e pagamento
+            3. Como adquirir
           </h2>
           <p className="mt-3">
-            O pedido é concluído com a confirmação do pagamento e do frete pela
-            nossa equipe (via WhatsApp ou e-mail). Aceitamos Pix e cartão de
-            crédito. A nota fiscal acompanha todos os pedidos.
+            A Manguebras é distribuidora e atende oficinas, autopeças,
+            transportadoras e frotas. Para adquirir uma peça, entre em contato
+            com nossa equipe pelo WhatsApp ou telefone — informamos preço,
+            disponibilidade e as condições de atendimento.
           </p>
         </section>
 
-        <section className="rounded-2xl border border-graphite-200 bg-white p-7 shadow-soft">
+        <section className="rounded-lg border border-graphite-200 bg-white p-7 shadow-soft">
           <h2 className="font-display text-base font-bold uppercase tracking-wide text-brand-900">
             4. Responsabilidade sobre aplicação
           </h2>
@@ -64,7 +65,7 @@ export default function TermosPage() {
           </p>
         </section>
 
-        <section className="rounded-2xl border border-graphite-200 bg-white p-7 shadow-soft">
+        <section className="rounded-lg border border-graphite-200 bg-white p-7 shadow-soft">
           <h2 className="font-display text-base font-bold uppercase tracking-wide text-brand-900">
             5. Propriedade intelectual
           </h2>

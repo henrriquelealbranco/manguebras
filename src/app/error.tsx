@@ -13,7 +13,7 @@ export default function GlobalError({
 }) {
   return (
     <div className="container-page flex min-h-[50vh] flex-col items-center justify-center gap-5 py-20 text-center">
-      <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-red-50 text-red-600">
+      <span className="flex h-14 w-14 items-center justify-center rounded-lg bg-red-50 text-red-600">
         <TriangleAlert className="h-7 w-7" />
       </span>
       <div>

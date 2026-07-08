@@ -34,7 +34,7 @@ export function FaqSection() {
         <Accordion
           type="single"
           collapsible
-          className="rounded-2xl border border-graphite-200 bg-white px-5 shadow-soft"
+          className="rounded-lg border border-graphite-200 bg-white px-5 shadow-soft"
         >
           {FAQ_ITEMS.slice(0, 4).map((item, i) => (
             <AccordionItem

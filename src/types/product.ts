@@ -1,9 +1,9 @@
 /**
- * Modelo de dados do catálogo Manguebras.
+ * Modelo de dados do CATÁLOGO VIRTUAL Manguebras (não é e-commerce).
  *
- * Modelo de venda HÍBRIDO:
- * - Produto com `priceCents` definido → carrinho + checkout normal
- * - Produto sem preço → CTA "Solicitar orçamento" via WhatsApp
+ * A Manguebras é distribuidora e não vende online. O site apresenta a peça
+ * (foto + ficha técnica) e a conversão acontece por consulta ao representante.
+ * `priceCents` é opcional e de uso interno — NÃO é exibido no site público.
  */
 
 export type CategorySlug =

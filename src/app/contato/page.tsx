@@ -73,7 +73,7 @@ export default function ContatoPage() {
           {CHANNELS.map((channel) => {
             const content = (
               <>
-                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-brand-100 text-brand-700">
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-md bg-brand-100 text-brand-700">
                   <channel.icon className="h-5 w-5" />
                 </span>
                 <span>
@@ -93,21 +93,21 @@ export default function ContatoPage() {
                 {...(channel.external
                   ? { target: "_blank", rel: "noopener noreferrer" }
                   : {})}
-                className="flex items-center gap-4 rounded-2xl border border-graphite-200 bg-white p-4 shadow-soft transition-all duration-300 hover:-translate-y-0.5 hover:border-brand-300 hover:shadow-card"
+                className="flex items-center gap-4 rounded-lg border border-graphite-200 bg-white p-4 shadow-soft transition-all duration-300 hover:-translate-y-0.5 hover:border-brand-300 hover:shadow-card"
               >
                 {content}
               </a>
             ) : (
               <div
                 key={channel.title}
-                className="flex items-center gap-4 rounded-2xl border border-graphite-200 bg-white p-4 shadow-soft"
+                className="flex items-center gap-4 rounded-lg border border-graphite-200 bg-white p-4 shadow-soft"
               >
                 {content}
               </div>
             );
           })}
 
-          <div className="rounded-2xl bg-brand-950 p-5">
+          <div className="rounded-lg bg-brand-950 p-5">
             <p className="text-xs font-bold uppercase tracking-widest text-accent-400">
               Dica rápida
             </p>

@@ -60,7 +60,7 @@ export function ContactForm() {
     <form
       onSubmit={handleSubmit(onSubmit)}
       noValidate
-      className="rounded-2xl border border-graphite-200 bg-white p-6 shadow-soft"
+      className="rounded-lg border border-graphite-200 bg-white p-6 shadow-soft"
     >
       <h2 className="font-display text-sm font-bold uppercase tracking-widest text-brand-900">
         Envie sua mensagem
@@ -134,7 +134,7 @@ export function ContactForm() {
       <button
         type="submit"
         disabled={isSubmitting}
-        className="mt-5 inline-flex items-center gap-2 rounded-lg bg-accent-500 px-7 py-3.5 text-xs font-bold uppercase tracking-widest text-white transition-all duration-300 hover:scale-[1.02] hover:bg-accent-600 disabled:opacity-60"
+        className="mt-5 inline-flex items-center gap-2 rounded-lg bg-action-500 px-7 py-3.5 text-xs font-bold uppercase tracking-widest text-white transition-all duration-300 hover:scale-[1.02] hover:bg-action-600 active:bg-action-700 disabled:opacity-60"
       >
         {isSubmitting ? (
           <Loader2 className="h-4 w-4 animate-spin" />

@@ -18,7 +18,7 @@ export default function PoliticaDeTrocaPage() {
         description="Transparência do pedido à devolução."
       />
       <div className="container-page max-w-3xl space-y-8 py-12 text-sm leading-relaxed text-graphite-600">
-        <section className="rounded-2xl border border-graphite-200 bg-white p-7 shadow-soft">
+        <section className="rounded-lg border border-graphite-200 bg-white p-7 shadow-soft">
           <h2 className="font-display text-base font-bold uppercase tracking-wide text-brand-900">
             1. Prazo para troca ou devolução
           </h2>
@@ -30,7 +30,7 @@ export default function PoliticaDeTrocaPage() {
           </p>
         </section>
 
-        <section className="rounded-2xl border border-graphite-200 bg-white p-7 shadow-soft">
+        <section className="rounded-lg border border-graphite-200 bg-white p-7 shadow-soft">
           <h2 className="font-display text-base font-bold uppercase tracking-wide text-brand-900">
             2. Condições do produto
           </h2>
@@ -45,7 +45,7 @@ export default function PoliticaDeTrocaPage() {
           </ul>
         </section>
 
-        <section className="rounded-2xl border border-graphite-200 bg-white p-7 shadow-soft">
+        <section className="rounded-lg border border-graphite-200 bg-white p-7 shadow-soft">
           <h2 className="font-display text-base font-bold uppercase tracking-wide text-brand-900">
             3. Como solicitar
           </h2>
@@ -56,7 +56,7 @@ export default function PoliticaDeTrocaPage() {
           </p>
         </section>
 
-        <section className="rounded-2xl border border-graphite-200 bg-white p-7 shadow-soft">
+        <section className="rounded-lg border border-graphite-200 bg-white p-7 shadow-soft">
           <h2 className="font-display text-base font-bold uppercase tracking-wide text-brand-900">
             4. Reembolso e frete
           </h2>
@@ -68,7 +68,7 @@ export default function PoliticaDeTrocaPage() {
           </p>
         </section>
 
-        <section className="rounded-2xl border border-graphite-200 bg-white p-7 shadow-soft">
+        <section className="rounded-lg border border-graphite-200 bg-white p-7 shadow-soft">
           <h2 className="font-display text-base font-bold uppercase tracking-wide text-brand-900">
             5. Aplicação incorreta
           </h2>

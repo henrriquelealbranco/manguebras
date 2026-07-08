@@ -33,7 +33,7 @@ export function FinalCta() {
             )}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2.5 rounded-lg bg-accent-500 px-7 py-3.5 text-xs font-bold uppercase tracking-widest text-white shadow-elevated transition-all duration-300 hover:scale-[1.02] hover:bg-accent-600"
+            className="inline-flex items-center gap-2.5 rounded-lg bg-action-500 px-7 py-3.5 text-xs font-bold uppercase tracking-widest text-white shadow-elevated transition-all duration-300 hover:scale-[1.02] hover:bg-action-600 active:bg-action-700"
           >
             <MessageCircle className="h-4 w-4" />
             Falar no WhatsApp

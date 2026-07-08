@@ -36,7 +36,7 @@ export function Gallery({ images, alt }: GalleryProps) {
     <div>
       <Dialog>
         <div
-          className="group relative aspect-square overflow-hidden rounded-2xl border border-graphite-200 bg-white"
+          className="group relative aspect-square overflow-hidden rounded-lg border border-graphite-200 bg-white"
           onMouseEnter={() => setZooming(true)}
           onMouseLeave={() => setZooming(false)}
           onMouseMove={handleMove}

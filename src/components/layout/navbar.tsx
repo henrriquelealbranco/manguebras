@@ -1,22 +1,17 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
 import {
-  Lock,
+  Boxes,
   Mail,
   MessageCircle,
-  Package,
   Phone,
-  ShoppingCart,
   Truck,
-  User,
 } from "lucide-react";
 import { Logo } from "@/components/shared/logo";
 import { CategoriesMenu } from "@/components/layout/mega-menu";
 import { MobileMenu } from "@/components/layout/mobile-menu";
 import { SearchAutocomplete } from "@/components/search/search-autocomplete";
-import { useCartCount } from "@/hooks/use-cart";
 import { SITE, whatsappLink } from "@/constants/site";
 
 const LINE_LINKS = [
@@ -27,29 +22,6 @@ const LINE_LINKS = [
   { href: "/sobre", label: "Quem Somos" },
   { href: "/contato", label: "Contato" },
 ];
-
-/**
- * Badge de itens do carrinho (contagem só após montar,
- * pois o carrinho vive em localStorage).
- */
-function CartButton() {
-  const count = useCartCount();
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
-
-  return (
-    <Link
-      href="/carrinho"
-      aria-label={`Carrinho de compras${mounted && count > 0 ? ` — ${count} itens` : ""}`}
-      className="relative flex h-9 w-9 items-center justify-center rounded-lg text-white transition-colors hover:bg-white/10"
-    >
-      <ShoppingCart className="h-5 w-5" />
-      <span className="absolute -right-1 -top-1 flex h-4.5 min-w-4.5 items-center justify-center rounded-full bg-accent-500 px-1 text-[10px] font-bold text-white">
-        {mounted ? (count > 99 ? "99+" : count) : 0}
-      </span>
-    </Link>
-  );
-}
 
 function TrustBadge({
   icon: Icon,
@@ -62,7 +34,7 @@ function TrustBadge({
 }) {
   return (
     <div className="flex items-center gap-3">
-      <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-accent-400/40 text-accent-400">
+      <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-md border border-accent-400/40 text-accent-400">
         <Icon className="h-5 w-5" />
       </span>
       <div className="leading-tight">
@@ -76,9 +48,9 @@ function TrustBadge({
 }
 
 /**
- * Header global em 3 níveis (estilo marketplace):
- * 1. barra utilitária preta — contatos, pedido, conta, carrinho
- * 2. faixa principal verde — logo, busca central, selos
+ * Header global em 3 níveis — CATÁLOGO VIRTUAL (não é loja de venda online):
+ * 1. barra utilitária — contatos e canal com representante
+ * 2. faixa principal verde — logo, busca no catálogo, selos institucionais
  * 3. faixa de navegação — categorias + linhas
  */
 export function Navbar() {
@@ -118,22 +90,17 @@ export function Navbar() {
           </div>
           <div className="flex shrink-0 items-center gap-2">
             <a
-              href={whatsappLink("Olá! Quero acompanhar meu pedido.")}
+              href={whatsappLink(
+                "Olá! Quero falar com um representante da Manguebras.",
+              )}
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden h-10 items-center gap-1.5 px-1.5 transition-colors hover:text-accent-400 md:flex"
+              className="flex h-10 items-center gap-1.5 px-1.5 transition-colors hover:text-accent-400"
             >
-              <Package className="h-3.5 w-3.5" />
-              Acompanhe seu pedido
+              <MessageCircle className="h-3.5 w-3.5 text-accent-400" />
+              <span className="hidden sm:inline">Falar com um representante</span>
+              <span className="sm:hidden">Representante</span>
             </a>
-            <Link
-              href="/conta"
-              className="hidden h-10 items-center gap-1.5 px-1.5 transition-colors hover:text-accent-400 sm:flex"
-            >
-              <User className="h-3.5 w-3.5" />
-              Entre ou Cadastre-se
-            </Link>
-            <CartButton />
           </div>
         </div>
       </div>
@@ -151,13 +118,13 @@ export function Navbar() {
           <div className="hidden shrink-0 items-center gap-8 xl:flex">
             <TrustBadge
               icon={Truck}
-              title="Envio rápido"
-              subtitle="para todo o Brasil"
+              title="Distribuição nacional"
+              subtitle="Atendemos todo o Brasil"
             />
             <TrustBadge
-              icon={Lock}
-              title="Compra segura"
-              subtitle="Seus dados protegidos"
+              icon={Boxes}
+              title="Catálogo completo"
+              subtitle="Milhares de itens diesel"
             />
           </div>
         </div>
