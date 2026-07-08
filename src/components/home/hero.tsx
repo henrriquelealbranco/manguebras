@@ -10,64 +10,60 @@ import {
   PackageCheck,
   ShieldCheck,
   Thermometer,
+  type LucideIcon,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
+/** Parte do título — `soft` usa peso mais fino + cor de destaque. */
+interface TitlePart {
+  text: string;
+  soft?: boolean;
+}
+
 interface Slide {
   badge: string;
-  /** Linhas do título; `accent: true` pinta a linha de verde vibrante */
-  title: { text: string; accent?: boolean }[];
+  title: TitlePart[];
   text: string;
+  /** PNG com fundo transparente (produto recortado) */
   image: string;
   imageAlt: string;
-  /** cutout = foto fundo branco vira recorte no fundo escuro (blend multiply) */
-  display: "cutout" | "card";
   href: string;
 }
 
 const SLIDES: Slide[] = [
   {
     badge: "Especialistas em diesel",
-    title: [
-      { text: "MANGUEIRAS" },
-      { text: "QUE", accent: true },
-      { text: "RESOLVEM." },
-    ],
+    title: [{ text: "MANGUEIRAS" }, { text: "QUE RESOLVEM.", soft: true }],
     text: "Especialistas em toda a linha de arrefecimento diesel para caminhões. Peça original e paralela.",
-    image: "/produtos/5000.jpg",
+    image: "/hero/radiador.png",
     imageAlt: "Mangueira inferior do radiador para caminhões",
-    display: "cutout",
     href: "/produtos",
   },
   {
     badge: "Linha intercooler",
-    title: [
-      { text: "PRESSÃO" },
-      { text: "DE TURBO", accent: true },
-      { text: "SOB CONTROLE." },
-    ],
+    title: [{ text: "PRESSÃO DE TURBO" }, { text: "SOB CONTROLE.", soft: true }],
     text: "Mangueiras de intercooler em silicone com anéis metálicos, feitas para a pressão da linha pesada.",
-    image: "/produtos/3000.jpg",
-    imageAlt: "Mangueira de intercooler tipo gomo em silicone",
-    display: "card",
+    image: "/hero/intercooler.png",
+    imageAlt: "Mangueira de intercooler em silicone com anéis metálicos",
     href: "/produtos?categoria=mangueiras-intercooler",
   },
   {
     badge: "Linha premium",
-    title: [
-      { text: "SILICONE" },
-      { text: "QUE DURA", accent: true },
-      { text: "MAIS." },
-    ],
+    title: [{ text: "SILICONE" }, { text: "QUE DURA MAIS.", soft: true }],
     text: "Linha azul de silicone premium: muito mais vida útil para o sistema do seu caminhão.",
-    image: "/produtos/6000.jpg",
+    image: "/hero/silicone.png",
     imageAlt: "Mangueira de silicone azul premium",
-    display: "card",
     href: "/produtos?categoria=mangueiras-silicone",
   },
 ];
 
-const FEATURES = [
+interface Benefit {
+  icon: LucideIcon;
+  title: string;
+  text: string;
+}
+
+const BENEFITS: Benefit[] = [
   {
     icon: ShieldCheck,
     title: "Alta resistência",
@@ -83,13 +79,14 @@ const FEATURES = [
     title: "Encaixe perfeito",
     text: "Peças originais e paralelas para diversos modelos.",
   },
-] as const;
+];
 
 const AUTOPLAY_MS = 6500;
 
 /**
- * Hero da homepage — carrossel escuro com produto em destaque,
- * conforme o design aprovado.
+ * Hero premium — catálogo automotivo de luxo.
+ * Grid assimétrico: texto · produto flutuante · benefícios técnicos.
+ * Produtos recortados (PNG transparente) sobre iluminação de estúdio.
  */
 export function Hero() {
   const [index, setIndex] = useState(0);
@@ -119,19 +116,24 @@ export function Hero() {
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
-      {/* Glow e textura de fundo */}
+      {/* Ambiente: gradiente profundo + textura sutil */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "radial-gradient(900px circle at 15% 30%, rgba(13,102,93,0.55), transparent 55%), radial-gradient(700px circle at 70% 80%, rgba(44,196,175,0.12), transparent 60%)",
+            "radial-gradient(1200px circle at 8% 0%, #0e4a41 0%, transparent 55%), radial-gradient(900px circle at 100% 100%, rgba(0,242,154,0.06), transparent 55%)",
         }}
+      />
+      {/* Linha de luz superior */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-accent-400/40 to-transparent"
       />
       {/* Marca d'água do M */}
       <div
         aria-hidden
-        className="pointer-events-none absolute -left-24 top-1/2 hidden h-[420px] w-[420px] -translate-y-1/2 opacity-[0.05] lg:block"
+        className="pointer-events-none absolute -left-28 top-1/2 hidden h-[460px] w-[460px] -translate-y-1/2 opacity-[0.04] lg:block"
       >
         <Image
           src="/marca/logo-branca.png"
@@ -141,98 +143,126 @@ export function Hero() {
         />
       </div>
 
-      <div className="container-page relative grid min-h-[480px] items-center gap-10 py-14 lg:grid-cols-[1.1fr_1fr_320px] lg:py-16">
-        {/* Texto */}
+      <div className="container-page relative grid min-h-[520px] items-center gap-10 py-16 lg:min-h-[600px] lg:grid-cols-[1.05fr_0.95fr_308px] lg:gap-14 lg:py-24">
+        {/* ── Coluna 1 — Texto ── */}
         <div className="relative z-10">
           <AnimatePresence mode="wait" initial={false}>
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 24 }}
+              initial={{ opacity: 0, y: 22 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -16 }}
-              transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+              exit={{ opacity: 0, y: -14 }}
+              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
             >
-              <span className="inline-flex items-center gap-2 rounded-full border border-accent-400/40 bg-accent-400/10 px-4 py-1.5 text-[11px] font-bold uppercase tracking-widest text-accent-300">
+              <span className="inline-flex items-center gap-2 rounded-sm border border-accent-400/30 bg-accent-400/[0.07] px-4 py-1.5 text-[11px] font-bold uppercase tracking-[0.2em] text-accent-300 backdrop-blur-sm">
                 <BadgeCheck className="h-3.5 w-3.5" />
                 {slide.badge}
               </span>
-              <h1 className="mt-5 font-display text-5xl font-black leading-[0.95] tracking-tight text-white md:text-6xl xl:text-7xl">
-                {slide.title.map((line) => (
+
+              <h1 className="mt-6 font-display text-5xl leading-[0.94] tracking-tight text-white md:text-6xl xl:text-[4.4rem]">
+                {slide.title.map((part) => (
                   <span
-                    key={line.text}
-                    className={cn("block", line.accent && "text-accent-400")}
+                    key={part.text}
+                    className={cn(
+                      "block",
+                      part.soft ? "font-medium text-accent-400" : "font-black",
+                    )}
                   >
-                    {line.text}
+                    {part.text}
                   </span>
                 ))}
               </h1>
-              <p className="mt-5 max-w-sm text-[15px] leading-relaxed text-brand-200">
+
+              <p className="mt-6 max-w-sm text-[15px] leading-relaxed text-brand-200">
                 {slide.text}
               </p>
+
               <Link
                 href={slide.href}
-                className="group mt-7 inline-flex items-center gap-2.5 rounded-lg bg-action-500 px-6 py-3.5 text-xs font-bold uppercase tracking-widest text-white shadow-elevated transition-all duration-300 hover:scale-[1.02] hover:bg-action-600 active:bg-action-700"
+                className="group relative mt-9 inline-flex items-center gap-3 overflow-hidden rounded-sm border border-white/15 bg-gradient-to-b from-[#12564c] to-[#072a25] px-8 py-4 text-xs font-bold uppercase tracking-[0.18em] text-white shadow-[0_10px_30px_-10px_rgba(0,0,0,0.7)] transition-all duration-300 hover:border-accent-400/50 hover:shadow-[0_0_34px_-8px_rgba(44,196,175,0.55)]"
               >
-                Ver produtos
-                <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+                {/* brilho que passa no hover */}
+                <span
+                  aria-hidden
+                  className="pointer-events-none absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/10 to-transparent transition-transform duration-700 group-hover:translate-x-full"
+                />
+                <span className="relative">Ver produtos</span>
+                <ArrowRight className="relative h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
               </Link>
             </motion.div>
           </AnimatePresence>
         </div>
 
-        {/* Produto em destaque */}
-        <div className="relative z-10 flex items-center justify-center">
+        {/* ── Coluna 2 — Produto flutuante ── */}
+        <div className="relative z-10 flex min-h-[300px] items-center justify-center">
+          {/* Brilho radial de estúdio (atrás do produto) */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute left-1/2 top-1/2 h-[125%] w-[125%] -translate-x-1/2 -translate-y-1/2"
+            style={{
+              background:
+                "radial-gradient(circle, rgba(0,242,154,0.10) 0%, rgba(0,0,0,0) 70%)",
+            }}
+          />
           <AnimatePresence mode="wait" initial={false}>
             <motion.div
               key={index}
-              initial={{ opacity: 0, scale: 0.92, x: 32 }}
-              animate={{ opacity: 1, scale: 1, x: 0 }}
-              exit={{ opacity: 0, scale: 0.95, x: -24 }}
-              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-              className={cn(
-                "relative",
-                slide.display === "card" &&
-                  "rounded-lg bg-white p-6 shadow-elevated ring-1 ring-white/20",
-              )}
+              initial={{ opacity: 0, scale: 0.94, y: 12 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.97, y: -8 }}
+              transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+              className="relative"
             >
               <Image
                 src={slide.image}
                 alt={slide.imageAlt}
-                width={440}
-                height={440}
+                width={460}
+                height={460}
                 priority={index === 0}
-                sizes="(max-width: 768px) 300px, 440px"
-                className={cn(
-                  "h-auto w-[300px] md:w-[400px] xl:w-[440px]",
-                  slide.display === "cutout" && "mix-blend-multiply",
-                )}
+                sizes="(max-width: 1024px) 320px, 440px"
+                className="h-auto w-[280px] md:w-[380px] xl:w-[440px]"
+                style={{
+                  filter:
+                    "drop-shadow(0 26px 30px rgba(0,0,0,0.55)) drop-shadow(0 2px 6px rgba(0,0,0,0.4))",
+                }}
+              />
+              {/* sombra projetada no "chão" */}
+              <div
+                aria-hidden
+                className="pointer-events-none absolute -bottom-4 left-1/2 h-8 w-3/4 -translate-x-1/2 rounded-[50%] bg-black/45 blur-xl"
               />
             </motion.div>
           </AnimatePresence>
         </div>
 
-        {/* Diferenciais */}
-        <div className="relative z-10 hidden flex-col gap-7 border-l border-white/10 pl-8 lg:flex">
-          {FEATURES.map((feature) => (
-            <div key={feature.title} className="flex items-start gap-4">
-              <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-accent-400/50 text-accent-400">
-                <feature.icon className="h-5 w-5" />
-              </span>
-              <div>
-                <p className="text-[13px] font-bold uppercase tracking-wide text-white">
-                  {feature.title}
+        {/* ── Coluna 3 — Benefícios técnicos (micro-cards) ── */}
+        <div className="relative z-10 flex flex-col gap-3">
+          <p className="mb-1 hidden text-[10px] font-bold uppercase tracking-[0.25em] text-brand-400 lg:block">
+            Engenharia
+          </p>
+          <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
+            {BENEFITS.map((benefit) => (
+              <div
+                key={benefit.title}
+                className="group rounded-sm border border-white/10 bg-white/[0.05] p-4 backdrop-blur-sm transition-colors duration-300 hover:border-accent-400/30 hover:bg-white/[0.08]"
+              >
+                <span className="flex h-9 w-9 items-center justify-center rounded-sm border border-white/10 bg-brand-950/40 text-accent-400 transition-colors group-hover:border-accent-400/40">
+                  <benefit.icon className="h-[18px] w-[18px]" />
+                </span>
+                <p className="mt-3 text-xs font-bold uppercase tracking-wide text-white">
+                  {benefit.title}
                 </p>
-                <p className="mt-1 text-xs leading-relaxed text-brand-300">
-                  {feature.text}
+                <p className="mt-1 text-[11px] leading-relaxed text-brand-300">
+                  {benefit.text}
                 </p>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
 
-      {/* Dots — área de toque ampliada (32px), visual compacto */}
-      <div className="relative z-10 flex justify-center pb-4">
+      {/* Dots */}
+      <div className="relative z-10 flex justify-center pb-8">
         {SLIDES.map((s, i) => (
           <button
             key={s.badge}
@@ -244,10 +274,10 @@ export function Hero() {
           >
             <span
               className={cn(
-                "h-2 rounded-full transition-all duration-300",
+                "h-[3px] rounded-full transition-all duration-300",
                 i === index
-                  ? "w-7 bg-accent-400"
-                  : "w-2 bg-white/25 group-hover/dot:bg-white/50",
+                  ? "w-8 bg-accent-400"
+                  : "w-4 bg-white/20 group-hover/dot:bg-white/45",
               )}
             />
           </button>
