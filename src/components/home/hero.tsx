@@ -34,7 +34,7 @@ const SLIDES: Slide[] = [
   {
     badge: "Especialistas em diesel",
     title: [{ text: "MANGUEIRAS" }, { text: "QUE RESOLVEM.", soft: true }],
-    text: "Especialistas em toda a linha de arrefecimento diesel para caminhões. Peça original e paralela.",
+    text: "Especialistas em toda a linha de arrefecimento diesel para caminhões — peças de reposição de alta qualidade.",
     image: "/hero/radiador.png",
     imageAlt: "Mangueira inferior do radiador para caminhões",
     href: "/produtos",
@@ -77,7 +77,7 @@ const BENEFITS: Benefit[] = [
   {
     icon: PackageCheck,
     title: "Encaixe perfeito",
-    text: "Peças originais e paralelas para diversos modelos.",
+    text: "Peças de reposição para diversas montadoras e modelos.",
   },
 ];
 

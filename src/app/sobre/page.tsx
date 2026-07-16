@@ -72,8 +72,8 @@ export default function SobrePage() {
             <p>
               Nosso diferencial é o atendimento técnico: se você não sabe o
               código da peça, basta enviar uma foto da amostra pelo WhatsApp.
-              Nossa equipe identifica o item e encontra a solução — original ou
-              paralela — para o caminhão voltar a rodar.
+              Nossa equipe identifica o item e encontra a peça de reposição
+              certa para o caminhão voltar a rodar.
             </p>
           </div>
           <a

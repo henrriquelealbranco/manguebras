@@ -11,7 +11,7 @@ export const FAQ_ITEMS: FaqItem[] = [
   {
     question: "Não sei o código da mangueira. Como identificar a peça certa?",
     answer:
-      "É a nossa especialidade! Envie uma foto da mangueira (mesmo adaptada ou danificada) pelo WhatsApp, junto com o modelo do caminhão. Nossa equipe identifica a peça original ou uma similar compatível no nosso catálogo com milhares de itens.",
+      "É a nossa especialidade! Envie uma foto da mangueira (mesmo adaptada ou danificada) pelo WhatsApp, junto com o modelo do caminhão. Nossa equipe identifica a peça e indica a de reposição compatível no nosso catálogo com milhares de itens.",
   },
   {
     question: "O site vende online? Como faço para comprar?",

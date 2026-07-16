@@ -118,7 +118,7 @@ export default async function ProdutoPage({ params }: PageProps) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <div className="container-page py-5">
+      <div className="container-page py-3">
         <PageBreadcrumb
           items={[
             { label: "Produtos", href: "/produtos" },
@@ -136,7 +136,7 @@ export default async function ProdutoPage({ params }: PageProps) {
       </div>
 
       {/* Bloco principal — foto | ficha técnica */}
-      <div className="container-page grid gap-10 pb-14 lg:grid-cols-2">
+      <div className="container-page grid gap-8 pb-10 lg:grid-cols-[minmax(0,0.9fr)_1fr]">
         <Gallery images={product.images} alt={product.name} />
 
         <div>
@@ -160,11 +160,11 @@ export default async function ProdutoPage({ params }: PageProps) {
             )}
           </div>
 
-          <h1 className="mt-3 font-display text-2xl font-extrabold leading-tight text-graphite-900 md:text-3xl">
+          <h1 className="mt-2 font-display text-xl font-extrabold leading-tight text-graphite-900 md:text-2xl">
             {product.name}
           </h1>
 
-          <div className="mt-2 flex flex-wrap items-center gap-3 text-sm text-graphite-500">
+          <div className="mt-1.5 flex flex-wrap items-center gap-3 text-sm text-graphite-500">
             <span>
               Cód. <strong className="text-graphite-700">{product.code}</strong>
             </span>
@@ -174,13 +174,13 @@ export default async function ProdutoPage({ params }: PageProps) {
             </span>
           </div>
 
-          <p className="mt-4 text-sm leading-relaxed text-graphite-600">
+          <p className="mt-2.5 text-sm leading-relaxed text-graphite-600">
             {product.shortDescription}
           </p>
 
           {/* DESCRIÇÃO — ficha técnica no formato do cliente (print-friendly) */}
-          <div className="mt-5 overflow-hidden rounded-lg border border-graphite-300 bg-white shadow-soft">
-            <div className="flex items-center justify-between border-b-2 border-brand-900 bg-graphite-50 px-5 py-3">
+          <div className="mt-3.5 overflow-hidden rounded-lg border border-graphite-300 bg-white shadow-soft">
+            <div className="flex items-center justify-between border-b-2 border-brand-900 bg-graphite-50 px-4 py-2">
               <h2 className="font-display text-sm font-extrabold uppercase tracking-widest text-brand-900">
                 Descrição
               </h2>
@@ -197,13 +197,13 @@ export default async function ProdutoPage({ params }: PageProps) {
                   >
                     <th
                       scope="row"
-                      className="w-[42%] bg-graphite-50/70 px-5 py-3 text-left align-top text-[11px] font-bold uppercase tracking-wide text-graphite-500"
+                      className="w-[42%] bg-graphite-50/70 px-4 py-2 text-left align-top text-[11px] font-bold uppercase tracking-wide text-graphite-500"
                     >
                       {row.label}
                     </th>
                     <td
                       className={cn(
-                        "px-5 py-3 align-top font-semibold text-graphite-900",
+                        "px-4 py-2 align-top font-semibold text-graphite-900",
                         row.label === "Código Manguebras" &&
                           "font-display text-base font-extrabold text-brand-900",
                       )}
@@ -217,8 +217,8 @@ export default async function ProdutoPage({ params }: PageProps) {
           </div>
 
           {/* Bloco de consulta (sem venda) */}
-          <div className="mt-5 rounded-lg border border-brand-200 bg-brand-50/60 p-6">
-            <p className="font-display text-lg font-extrabold text-brand-900">
+          <div className="mt-4 rounded-lg border border-brand-200 bg-brand-50/60 p-5">
+            <p className="font-display text-base font-extrabold text-brand-900">
               Consulte disponibilidade e condições
             </p>
             <p className="mt-1 text-sm text-graphite-600">
@@ -229,7 +229,7 @@ export default async function ProdutoPage({ params }: PageProps) {
               href={consultaHref}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-4 flex w-full items-center justify-center gap-2 rounded-lg bg-action-500 py-3.5 text-xs font-bold uppercase tracking-widest text-white transition-all duration-300 hover:scale-[1.01] hover:bg-action-600 active:bg-action-700"
+              className="mt-3.5 flex w-full items-center justify-center gap-2 rounded-lg bg-action-500 py-3 text-xs font-bold uppercase tracking-widest text-white transition-all duration-300 hover:scale-[1.01] hover:bg-action-600 active:bg-action-700"
             >
               <MessageCircle className="h-4 w-4" />
               Consultar esta peça
@@ -244,7 +244,7 @@ export default async function ProdutoPage({ params }: PageProps) {
           </div>
 
           {/* Selos institucionais */}
-          <ul className="mt-5 space-y-2.5 text-sm text-graphite-600">
+          <ul className="mt-4 space-y-2 text-sm text-graphite-600">
             <li className="flex items-center gap-2.5">
               <Truck className="h-4.5 w-4.5 shrink-0 text-accent-600" />
               Distribuição para <strong>todo o Brasil</strong>
