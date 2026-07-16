@@ -89,7 +89,7 @@ export function SearchAutocomplete() {
       role="search"
       className="relative"
     >
-      <div className="flex h-12 w-full overflow-hidden rounded-lg bg-white shadow-soft">
+      <div className="flex h-12 w-full overflow-hidden rounded-lg border border-graphite-300 bg-white shadow-soft">
         <input
           type="search"
           name="q"

@@ -80,11 +80,11 @@ export function CategoriesMenu() {
         aria-haspopup="true"
         onClick={() => setOpen((v) => !v)}
         className={cn(
-          "flex h-12 items-center gap-2.5 border-x border-white/10 px-4 text-xs font-bold uppercase tracking-wide text-white transition-colors sm:px-5",
-          open ? "bg-white/10" : "bg-white/5 hover:bg-white/10",
+          "flex h-12 items-center gap-2.5 border-x border-graphite-200 px-4 text-xs font-bold uppercase tracking-wide text-graphite-800 transition-colors sm:px-5",
+          open ? "bg-graphite-100" : "bg-graphite-50 hover:bg-graphite-100",
         )}
       >
-        <AlignJustify className="h-4 w-4 text-accent-400" />
+        <AlignJustify className="h-4 w-4 text-accent-600" />
         <span className="hidden sm:inline">Todas as categorias</span>
         <span className="sm:hidden">Categorias</span>
         <ChevronDown

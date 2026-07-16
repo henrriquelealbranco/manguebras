@@ -44,7 +44,7 @@ export function MobileMenu() {
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger
         aria-label="Abrir menu"
-        className="flex h-10 w-10 items-center justify-center rounded-lg text-white transition-colors hover:bg-white/10 lg:hidden"
+        className="flex h-10 w-10 items-center justify-center rounded-lg text-graphite-700 transition-colors hover:bg-graphite-100 lg:hidden"
       >
         <Menu className="h-6 w-6" />
       </SheetTrigger>

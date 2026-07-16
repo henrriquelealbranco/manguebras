@@ -33,30 +33,32 @@ function TrustBadge({
 }) {
   return (
     <div className="flex items-center gap-3">
-      <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-md border border-accent-400/40 text-accent-400">
+      <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-md border border-accent-500/40 text-accent-600">
         <Icon className="h-5 w-5" />
       </span>
       <div className="leading-tight">
-        <p className="text-xs font-bold uppercase tracking-wide text-white">
+        <p className="text-xs font-bold uppercase tracking-wide text-graphite-900">
           {title}
         </p>
-        <p className="mt-0.5 text-[11px] text-brand-300">{subtitle}</p>
+        <p className="mt-0.5 text-[11px] text-graphite-500">{subtitle}</p>
       </div>
     </div>
   );
 }
 
 /**
- * Header global em 3 níveis — CATÁLOGO VIRTUAL (não é loja de venda online):
+ * Header global em 3 níveis — CATÁLOGO VIRTUAL (não é loja de venda online).
+ * Cabeçalho CLARO (fundo branco, marca em verde) — o miolo escuro do site
+ * (hero, seções, rodapé) permanece; só o topo foi clareado.
  * 1. barra utilitária — contatos e canal com representante
- * 2. faixa principal verde — logo, busca no catálogo, selos institucionais
+ * 2. faixa principal — logo, busca no catálogo, selos institucionais
  * 3. faixa de navegação — categorias + linhas
  */
 export function Navbar() {
   return (
     <>
       {/* 1 ─ Barra utilitária */}
-      <div className="bg-graphite-950 text-white">
+      <div className="border-b border-graphite-200 bg-graphite-100 text-graphite-600">
         <div className="container-page flex h-10 items-center justify-between gap-4 text-[11px] font-semibold uppercase tracking-wide">
           <div className="flex min-w-0 items-center gap-2">
             <a
@@ -65,25 +67,25 @@ export function Navbar() {
               )}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex h-10 items-center gap-1.5 px-1.5 transition-colors hover:text-accent-400"
+              className="flex h-10 items-center gap-1.5 px-1.5 transition-colors hover:text-brand-700"
             >
-              <MessageCircle className="h-3.5 w-3.5 text-accent-400" />
+              <MessageCircle className="h-3.5 w-3.5 text-accent-600" />
               <span className="hidden sm:inline">
                 Atendimento especializado
               </span>
             </a>
             <a
               href={SITE.phoneHref}
-              className="flex h-10 items-center gap-1.5 px-1.5 transition-colors hover:text-accent-400"
+              className="flex h-10 items-center gap-1.5 px-1.5 transition-colors hover:text-brand-700"
             >
-              <Phone className="h-3.5 w-3.5 text-accent-400" />
+              <Phone className="h-3.5 w-3.5 text-accent-600" />
               {SITE.phone}
             </a>
             <a
               href={`mailto:${SITE.email}`}
-              className="hidden h-10 items-center gap-1.5 px-1.5 normal-case transition-colors hover:text-accent-400 lg:flex"
+              className="hidden h-10 items-center gap-1.5 px-1.5 normal-case transition-colors hover:text-brand-700 lg:flex"
             >
-              <Mail className="h-3.5 w-3.5 text-accent-400" />
+              <Mail className="h-3.5 w-3.5 text-accent-600" />
               {SITE.email}
             </a>
           </div>
@@ -94,9 +96,9 @@ export function Navbar() {
               )}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex h-10 items-center gap-1.5 px-1.5 transition-colors hover:text-accent-400"
+              className="flex h-10 items-center gap-1.5 px-1.5 transition-colors hover:text-brand-700"
             >
-              <MessageCircle className="h-3.5 w-3.5 text-accent-400" />
+              <MessageCircle className="h-3.5 w-3.5 text-accent-600" />
               <span className="hidden sm:inline">Falar com um representante</span>
               <span className="sm:hidden">Representante</span>
             </a>
@@ -105,10 +107,10 @@ export function Navbar() {
       </div>
 
       {/* 2 ─ Faixa principal */}
-      <div className="bg-brand-950">
+      <div className="border-b border-graphite-200 bg-white">
         <div className="container-page flex flex-wrap items-center gap-x-8 gap-y-4 py-4 lg:flex-nowrap">
           <div className="flex flex-1 items-center justify-between lg:flex-none">
-            <Logo variant="white" priority className="[&_img]:h-11 md:[&_img]:h-12" />
+            <Logo variant="color" priority className="[&_img]:h-11 md:[&_img]:h-12" />
             <MobileMenu />
           </div>
           <div className="order-3 w-full lg:order-none lg:max-w-2xl lg:flex-1">
@@ -132,7 +134,7 @@ export function Navbar() {
       {/* 3 ─ Faixa de navegação */}
       <nav
         aria-label="Navegação principal"
-        className="glass-dark sticky top-0 z-50 border-b border-white/5 bg-brand-950/95"
+        className="sticky top-0 z-50 border-b border-graphite-200 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/80"
       >
         <div className="container-page relative flex items-center gap-1">
           <CategoriesMenu />
@@ -141,7 +143,7 @@ export function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="whitespace-nowrap rounded-md px-3.5 py-3.5 text-xs font-bold uppercase tracking-wide text-white/85 transition-colors hover:text-accent-400"
+                className="whitespace-nowrap rounded-md px-3.5 py-3.5 text-xs font-bold uppercase tracking-wide text-graphite-700 transition-colors hover:text-brand-700"
               >
                 {link.label}
               </Link>
