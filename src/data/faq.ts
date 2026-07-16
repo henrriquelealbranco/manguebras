@@ -34,8 +34,8 @@ export const FAQ_ITEMS: FaqItem[] = [
       "Sim. Fazemos distribuição para todos os estados. Prazos e logística são combinados com nossa equipe conforme a região e o volume.",
   },
   {
-    question: "Trabalham com outras linhas além da diesel?",
+    question: "Para quais veículos vocês trabalham?",
     answer:
-      "Sim. Além da linha de arrefecimento diesel — nossa especialidade — atendemos as linhas leve, pesada, agrícola e industrial, com mangueiras, abraçadeiras, juntas e acessórios.",
+      "Somos especialistas na linha diesel/pesada: caminhões, pickups e vans. Temos mangueiras, abraçadeiras, juntas e acessórios organizados por montadora (Scania, Volvo, Mercedes-Benz, Iveco, Volkswagen e outras) para você achar a peça certa pelo modelo do seu veículo.",
   },
 ];

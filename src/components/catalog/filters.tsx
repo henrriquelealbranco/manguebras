@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/sheet";
 import { CATEGORIES, getCategory } from "@/data/categories";
 import { PRODUCTS } from "@/data/products";
-import { LINE_LABELS } from "@/lib/catalog";
+import { LINE_LABELS, listMontadoras, montadoraName } from "@/lib/catalog";
 import { cn } from "@/lib/utils";
 import type { ProductLine } from "@/types/product";
 
@@ -24,6 +24,7 @@ import type { ProductLine } from "@/types/product";
 export interface ActiveFilters {
   q?: string;
   categoria?: string;
+  montadora?: string;
   linha?: string;
 }
 
@@ -115,7 +116,10 @@ function FilterOption({
 export function FilterPanel({ active }: { active: ActiveFilters }) {
   const { setParam, isPending } = useSetParam();
   const activeCategoria = active.categoria ?? "";
+  const activeMontadora = active.montadora ?? "";
   const activeLinha = active.linha ?? "";
+
+  const montadoras = useMemo(() => listMontadoras(), []);
 
   const categoryCounts = useMemo(() => {
     const counts = new Map<string, number>();
@@ -143,6 +147,22 @@ export function FilterPanel({ active }: { active: ActiveFilters }) {
         isPending && "pointer-events-none opacity-60",
       )}
     >
+      <FilterGroup title="Montadoras">
+        <div className="space-y-0.5">
+          {montadoras.map((m) => (
+            <FilterOption
+              key={m.slug}
+              label={m.name}
+              count={m.count}
+              active={activeMontadora === m.slug}
+              onClick={() =>
+                setParam("montadora", activeMontadora === m.slug ? null : m.slug)
+              }
+            />
+          ))}
+        </div>
+      </FilterGroup>
+
       <FilterGroup title="Categorias">
         <div className="space-y-0.5">
           {CATEGORIES.map((category) => (
@@ -178,7 +198,7 @@ export function FilterPanel({ active }: { active: ActiveFilters }) {
         </div>
       </FilterGroup>
 
-      {(active.categoria || active.linha || active.q) && (
+      {(active.categoria || active.montadora || active.linha || active.q) && (
         <Link
           href="/produtos"
           className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest text-accent-600 hover:text-accent-500"
@@ -197,6 +217,10 @@ export function ActiveFilterChips({ active }: { active: ActiveFilters }) {
 
   const chips: { key: string; label: string }[] = [];
   if (active.q) chips.push({ key: "q", label: `Busca: "${active.q}"` });
+  if (active.montadora) {
+    const nome = montadoraName(active.montadora);
+    if (nome) chips.push({ key: "montadora", label: nome });
+  }
   if (active.categoria) {
     const cat = getCategory(active.categoria);
     if (cat) chips.push({ key: "categoria", label: cat.name });

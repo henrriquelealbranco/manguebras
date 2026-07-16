@@ -9,7 +9,12 @@ import {
 } from "@/components/catalog/filters";
 import { ProductCard } from "@/components/product/product-card";
 import { getCategory } from "@/data/categories";
-import { LINE_LABELS, parseCatalogParams, queryProducts } from "@/lib/catalog";
+import {
+  LINE_LABELS,
+  montadoraName,
+  parseCatalogParams,
+  queryProducts,
+} from "@/lib/catalog";
 import { whatsappLink } from "@/constants/site";
 
 interface PageProps {
@@ -26,6 +31,14 @@ function pageTitle(query: ReturnType<typeof parseCatalogParams>): {
       pre: "Resultados para",
       highlight: `"${query.q}"`,
       description: "Veja o que encontramos no catálogo Manguebras.",
+    };
+  }
+  if (query.montadora) {
+    const nome = montadoraName(query.montadora) ?? "";
+    return {
+      pre: "Peças",
+      highlight: nome,
+      description: `Mangueiras, abraçadeiras e acessórios para ${nome} no catálogo Manguebras.`,
     };
   }
   if (query.categoria) {
@@ -58,6 +71,13 @@ export async function generateMetadata({
   searchParams,
 }: PageProps): Promise<Metadata> {
   const query = parseCatalogParams(await searchParams);
+  if (query.montadora) {
+    const nome = montadoraName(query.montadora) ?? "Montadora";
+    return {
+      title: `Peças ${nome}`,
+      description: `Catálogo de mangueiras, abraçadeiras e acessórios para ${nome} — Manguebras.`,
+    };
+  }
   if (query.categoria) {
     const category = getCategory(query.categoria)!;
     return { title: category.name, description: category.description };
@@ -88,10 +108,12 @@ export default async function ProdutosPage({ searchParams }: PageProps) {
   const active = {
     q: query.q,
     categoria: query.categoria,
+    montadora: query.montadora,
     linha: query.linha,
   };
   const activeCount =
     Number(Boolean(query.categoria)) +
+    Number(Boolean(query.montadora)) +
     Number(Boolean(query.linha)) +
     Number(Boolean(query.q));
 

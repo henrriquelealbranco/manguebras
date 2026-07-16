@@ -25,6 +25,7 @@ import {
 } from "@/components/ui/accordion";
 import { Separator } from "@/components/ui/separator";
 import { CATEGORIES } from "@/data/categories";
+import { listMontadoras } from "@/lib/catalog";
 import { SITE, whatsappLink } from "@/constants/site";
 
 const NAV_LINKS = [
@@ -80,6 +81,27 @@ export function MobileMenu() {
           </ul>
 
           <Accordion type="single" collapsible className="mt-2">
+            <AccordionItem value="montadoras" className="border-none">
+              <AccordionTrigger className="rounded-lg px-3 py-2.5 text-sm font-semibold text-graphite-800 hover:bg-brand-50 hover:no-underline">
+                Montadoras
+              </AccordionTrigger>
+              <AccordionContent className="pb-0">
+                <ul className="space-y-0.5 pl-3">
+                  {listMontadoras().map((m) => (
+                    <li key={m.slug}>
+                      <Link
+                        href={`/produtos?montadora=${m.slug}`}
+                        onClick={() => setOpen(false)}
+                        className="block rounded-lg px-3 py-2 text-sm text-graphite-600 transition-colors hover:bg-brand-50 hover:text-brand-800"
+                      >
+                        {m.name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </AccordionContent>
+            </AccordionItem>
+
             <AccordionItem value="categorias" className="border-none">
               <AccordionTrigger className="rounded-lg px-3 py-2.5 text-sm font-semibold text-graphite-800 hover:bg-brand-50 hover:no-underline">
                 Categorias

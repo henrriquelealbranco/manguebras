@@ -38,6 +38,9 @@ export function ProductCard({ product }: ProductCardProps) {
         </Link>
         <p className="mt-1.5 text-[11px] font-semibold uppercase tracking-wide text-graphite-500">
           Cód. {product.code}
+          {product.montadora !== "Universal" && (
+            <span className="text-brand-600"> · {product.montadora}</span>
+          )}
         </p>
         <p className="mt-1 line-clamp-2 text-[11px] leading-relaxed text-graphite-500">
           {product.shortDescription}

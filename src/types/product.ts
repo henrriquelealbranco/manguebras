@@ -3,7 +3,9 @@
  *
  * A Manguebras é distribuidora e não vende online. O site apresenta a peça
  * (foto + ficha técnica) e a conversão acontece por consulta ao representante.
- * `priceCents` é opcional e de uso interno — NÃO é exibido no site público.
+ *
+ * A organização segue o site atual do cliente: o cliente navega por
+ * MONTADORA (marca do veículo) e por CATEGORIA (tipo de peça).
  */
 
 export type CategorySlug =
@@ -16,12 +18,11 @@ export type CategorySlug =
   | "conexoes"
   | "acessorios";
 
-export type ProductLine =
-  | "diesel"
-  | "leve"
-  | "pesada"
-  | "agricola"
-  | "industrial";
+/**
+ * Linha de aplicação. A Manguebras trabalha apenas a linha diesel/pesada
+ * (caminhões, pickups e vans) — NÃO trabalha linha leve.
+ */
+export type ProductLine = "diesel" | "pesada";
 
 export interface Category {
   slug: CategorySlug;
@@ -33,18 +34,30 @@ export interface Category {
   skuRange: string;
 }
 
-export interface ProductSpec {
-  label: string;
-  value: string;
-}
-
-export interface VehicleApplication {
-  /** Ex.: "Volvo FH 460" */
-  vehicle: string;
-  /** Ex.: "2015–2022" */
-  years?: string;
-  /** Código original de referência (OEM), quando houver */
-  oemCode?: string;
+/**
+ * Ficha técnica no formato do site atual do cliente — pensada para o vendedor
+ * tirar um print e enviar ao cliente. A ordem dos campos espelha a tabela
+ * "DESCRIÇÃO" usada pela Manguebras.
+ */
+export interface FichaTecnica {
+  /** Montadora + série/modelo. Ex.: "Scania Série 4 / 124" */
+  montadora: string;
+  /** Número(s) de referência original (OEM). Ex.: "1524925 | 1442181" */
+  nOriginal?: string;
+  /** Aplicação da peça. Ex.: "Mangueira Inferior do Radiador" */
+  aplicacao: string;
+  /** Observações extras da aplicação (motor, variações). */
+  aplicacaoNotas?: string[];
+  /** Medidas/diâmetros. Ex.: "Ø 55 mm" */
+  medidas?: string;
+  /** Material. Ex.: "Borracha EPDM", "Silicone", "Aço zincado" */
+  material: string;
+  /** Unidade de venda. Ex.: "PÇ", "KIT" */
+  unidade: string;
+  /** Peso unitário. Ex.: "0,540 Kg" */
+  peso?: string;
+  /** Grupo no catálogo. Ex.: "011 – Mang. Scania" */
+  grupo?: string;
 }
 
 export interface Product {
@@ -55,39 +68,16 @@ export interface Product {
   shortDescription: string;
   description: string;
   category: CategorySlug;
+  /** Montadora/marca para navegação e filtro. Ex.: "Scania", "Universal" */
+  montadora: string;
   lines: ProductLine[];
   /** Caminhos das imagens em /public/produtos */
   images: string[];
-  /** Preço em centavos; ausente = produto sob orçamento */
-  priceCents?: number;
-  /** Preço "de" para ancoragem (riscado), em centavos */
-  compareAtCents?: number;
-  specs: ProductSpec[];
-  applications: VehicleApplication[];
-  /** Códigos de produtos frequentemente comprados juntos (combos) */
+  /** Ficha técnica exibida na página do produto (formato do cliente) */
+  ficha: FichaTecnica;
+  /** Códigos de produtos frequentemente relacionados */
   relatedCodes: string[];
   inStock: boolean;
   featured?: boolean;
   createdAt: string;
-}
-
-export interface CartItem {
-  code: string;
-  quantity: number;
-}
-
-export type SortOption =
-  | "relevance"
-  | "price-asc"
-  | "price-desc"
-  | "name-asc"
-  | "newest";
-
-export interface ProductFilters {
-  category?: CategorySlug;
-  lines?: ProductLine[];
-  query?: string;
-  onlyInStock?: boolean;
-  onlyWithPrice?: boolean;
-  sort?: SortOption;
 }

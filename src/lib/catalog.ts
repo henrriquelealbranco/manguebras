@@ -7,6 +7,8 @@ export type SortKey = "relevancia" | "a-z" | "novidades";
 export interface CatalogQuery {
   q?: string;
   categoria?: CategorySlug;
+  /** Slug da montadora (ex.: "scania"), quando filtrado */
+  montadora?: string;
   linha?: ProductLine;
   ordenar: SortKey;
 }
@@ -19,10 +21,7 @@ export const SORT_OPTIONS: { value: SortKey; label: string }[] = [
 
 export const LINE_LABELS: Record<ProductLine, string> = {
   diesel: "Linha Diesel",
-  leve: "Linha Leve",
   pesada: "Linha Pesada",
-  agricola: "Linha Agrícola",
-  industrial: "Linha Industrial",
 };
 
 const VALID_LINES = Object.keys(LINE_LABELS) as ProductLine[];
@@ -34,6 +33,41 @@ function normalize(text: string): string {
     .normalize("NFD")
     .replace(/[̀-ͯ]/g, "")
     .toLowerCase();
+}
+
+/** Slug estável para uma montadora (ex.: "Mercedes-Benz" → "mercedes-benz"). */
+export function montadoraSlug(name: string): string {
+  return normalize(name)
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+export interface MontadoraEntry {
+  slug: string;
+  name: string;
+  count: number;
+}
+
+/** Lista de montadoras do catálogo, com contagem, em ordem alfabética. */
+export function listMontadoras(): MontadoraEntry[] {
+  const map = new Map<string, MontadoraEntry>();
+  for (const p of PRODUCTS) {
+    const slug = montadoraSlug(p.montadora);
+    const entry = map.get(slug) ?? { slug, name: p.montadora, count: 0 };
+    entry.count += 1;
+    map.set(slug, entry);
+  }
+  return [...map.values()].sort((a, b) => {
+    // "Universal" sempre por último; demais em ordem alfabética.
+    if (a.name === "Universal") return 1;
+    if (b.name === "Universal") return -1;
+    return a.name.localeCompare(b.name, "pt-BR");
+  });
+}
+
+/** Nome de exibição de uma montadora a partir do slug. */
+export function montadoraName(slug: string): string | undefined {
+  return listMontadoras().find((m) => m.slug === slug)?.name;
 }
 
 type RawParams = Record<string, string | string[] | undefined>;
@@ -49,6 +83,12 @@ export function parseCatalogParams(params: RawParams): CatalogQuery {
   const categoriaRaw = first(params.categoria);
   const categoria = getCategory(categoriaRaw ?? "")?.slug;
 
+  const montadoraRaw = first(params.montadora);
+  const montadora =
+    montadoraRaw && listMontadoras().some((m) => m.slug === montadoraRaw)
+      ? montadoraRaw
+      : undefined;
+
   const linhaRaw = first(params.linha) as ProductLine | undefined;
   const linha =
     linhaRaw && VALID_LINES.includes(linhaRaw) ? linhaRaw : undefined;
@@ -57,7 +97,7 @@ export function parseCatalogParams(params: RawParams): CatalogQuery {
   const ordenar =
     ordenarRaw && VALID_SORTS.includes(ordenarRaw) ? ordenarRaw : "relevancia";
 
-  return { q, categoria, linha, ordenar };
+  return { q, categoria, montadora, linha, ordenar };
 }
 
 function matchesQuery(product: Product, q: string): boolean {
@@ -67,13 +107,15 @@ function matchesQuery(product: Product, q: string): boolean {
       product.name,
       product.code,
       product.shortDescription,
+      product.montadora,
+      product.ficha.montadora,
+      product.ficha.aplicacao,
+      product.ficha.nOriginal ?? "",
+      product.ficha.grupo ?? "",
       getCategory(product.category)?.name ?? "",
-      ...product.applications.map((a) => a.vehicle),
     ].join(" "),
   );
-  return needle
-    .split(/\s+/)
-    .every((term) => haystack.includes(term));
+  return needle.split(/\s+/).every((term) => haystack.includes(term));
 }
 
 function sortProducts(products: Product[], sort: SortKey): Product[] {
@@ -99,6 +141,9 @@ export function queryProducts(query: CatalogQuery): Product[] {
 
   if (query.categoria) {
     result = result.filter((p) => p.category === query.categoria);
+  }
+  if (query.montadora) {
+    result = result.filter((p) => montadoraSlug(p.montadora) === query.montadora);
   }
   if (query.linha) {
     result = result.filter((p) => p.lines.includes(query.linha!));

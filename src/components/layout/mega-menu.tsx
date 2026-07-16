@@ -17,6 +17,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { CATEGORIES } from "@/data/categories";
+import { listMontadoras } from "@/lib/catalog";
 import { whatsappLink } from "@/constants/site";
 import { cn } from "@/lib/utils";
 import type { CategorySlug } from "@/types/product";
@@ -103,9 +104,12 @@ export function CategoriesMenu() {
             : "invisible -translate-y-2 opacity-0",
         )}
       >
-        <div className="container-page grid gap-8 py-8 lg:grid-cols-[1fr_300px]">
+        <div className="container-page grid gap-8 py-8 lg:grid-cols-[1fr_230px_280px]">
           <nav aria-label="Categorias de produtos">
-            <ul className="grid gap-1 sm:grid-cols-2 xl:grid-cols-3">
+            <p className="mb-3 text-[11px] font-bold uppercase tracking-widest text-graphite-400">
+              Categorias
+            </p>
+            <ul className="grid gap-1 sm:grid-cols-2">
               {CATEGORIES.map((category) => {
                 const Icon = CATEGORY_ICONS[category.slug];
                 return (
@@ -130,6 +134,30 @@ export function CategoriesMenu() {
                   </li>
                 );
               })}
+            </ul>
+          </nav>
+
+          {/* Montadoras — navegação pela marca do veículo (site atual) */}
+          <nav
+            aria-label="Montadoras"
+            className="hidden border-l border-graphite-200/70 pl-8 lg:block"
+          >
+            <p className="mb-3 text-[11px] font-bold uppercase tracking-widest text-graphite-400">
+              Montadoras
+            </p>
+            <ul className="space-y-0.5">
+              {listMontadoras().map((m) => (
+                <li key={m.slug}>
+                  <Link
+                    href={`/produtos?montadora=${m.slug}`}
+                    onClick={() => setOpen(false)}
+                    className="flex items-center justify-between gap-2 rounded-md px-3 py-2 text-sm font-medium text-graphite-700 transition-colors hover:bg-brand-50 hover:text-brand-800"
+                  >
+                    {m.name}
+                    <span className="text-xs text-graphite-400">{m.count}</span>
+                  </Link>
+                </li>
+              ))}
             </ul>
           </nav>
 

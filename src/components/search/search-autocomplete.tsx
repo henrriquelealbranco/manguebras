@@ -24,7 +24,7 @@ function searchLocal(query: string): Product[] {
   const terms = q.split(/\s+/);
   return PRODUCTS.filter((p) => {
     const haystack = normalize(
-      `${p.name} ${p.code} ${p.applications.map((a) => a.vehicle).join(" ")}`,
+      `${p.name} ${p.code} ${p.montadora} ${p.ficha.montadora} ${p.ficha.aplicacao}`,
     );
     return terms.every((t) => haystack.includes(t));
   }).slice(0, MAX_RESULTS);

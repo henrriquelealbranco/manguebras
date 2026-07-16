@@ -16,7 +16,6 @@ import { SITE, whatsappLink } from "@/constants/site";
 
 const LINE_LINKS = [
   { href: "/produtos?linha=diesel", label: "Linha Diesel" },
-  { href: "/produtos?linha=leve", label: "Linha Leve" },
   { href: "/produtos?linha=pesada", label: "Linha Pesada" },
   { href: "/produtos?ordenar=novidades", label: "Lançamentos" },
   { href: "/sobre", label: "Quem Somos" },

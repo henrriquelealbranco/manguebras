@@ -92,7 +92,7 @@ export default function SobrePage() {
           {[
             { value: 4000, suffix: "+", label: "itens em catálogo" },
             { value: 8, suffix: "", label: "categorias de produtos" },
-            { value: 5, suffix: "", label: "linhas atendidas" },
+            { value: 12, suffix: "+", label: "montadoras atendidas" },
             { value: 27, suffix: "", label: "estados com entrega" },
           ].map((stat) => (
             <div

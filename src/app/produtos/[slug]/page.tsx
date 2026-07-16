@@ -1,20 +1,22 @@
 import type { Metadata } from "next";
+import type { ReactNode } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
   BadgeCheck,
+  Factory,
   Headset,
   MessageCircle,
   Phone,
   Truck,
 } from "lucide-react";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Gallery } from "@/components/product/gallery";
 import { ProductCarousel } from "@/components/product/product-carousel";
 import { PageBreadcrumb } from "@/components/shared/page-breadcrumb";
 import { getProductBySlug, PRODUCTS } from "@/data/products";
 import { getCategory } from "@/data/categories";
-import { relatedProductsFor } from "@/lib/catalog";
+import { montadoraSlug, relatedProductsFor } from "@/lib/catalog";
+import { cn } from "@/lib/utils";
 import { SITE, whatsappLink } from "@/constants/site";
 
 interface PageProps {
@@ -55,6 +57,36 @@ export default async function ProdutoPage({ params }: PageProps) {
   const category = getCategory(product.category);
   const related = relatedProductsFor(product);
 
+  // Linhas da ficha técnica, na ordem da tabela "DESCRIÇÃO" do cliente.
+  const f = product.ficha;
+  const fichaRows: { label: string; value: ReactNode }[] = [
+    { label: "Código Manguebras", value: product.code },
+    { label: "Montadora", value: f.montadora },
+    ...(f.nOriginal ? [{ label: "N. Original", value: f.nOriginal }] : []),
+    {
+      label: "Aplicação",
+      value: (
+        <>
+          <span>{f.aplicacao}</span>
+          {f.aplicacaoNotas?.length ? (
+            <span className="mt-1 block font-normal text-graphite-500">
+              {f.aplicacaoNotas.map((n) => (
+                <span key={n} className="block">
+                  {n}
+                </span>
+              ))}
+            </span>
+          ) : null}
+        </>
+      ),
+    },
+    ...(f.medidas ? [{ label: "Medidas", value: f.medidas }] : []),
+    { label: "Material", value: f.material },
+    { label: "Unidade", value: f.unidade },
+    ...(f.peso ? [{ label: "Peso", value: f.peso }] : []),
+    ...(f.grupo ? [{ label: "Grupo", value: f.grupo }] : []),
+  ];
+
   // JSON-LD de catálogo (Product, sem Offer/preço — não há venda online)
   const jsonLd = {
     "@context": "https://schema.org",
@@ -64,6 +96,14 @@ export default async function ProdutoPage({ params }: PageProps) {
     image: product.images.map((i) => `${SITE.url}${i}`),
     description: product.shortDescription,
     brand: { "@type": "Brand", name: SITE.name },
+    ...(product.montadora !== "Universal"
+      ? {
+          manufacturer: {
+            "@type": "Organization",
+            name: product.montadora,
+          },
+        }
+      : {}),
     ...(category ? { category: category.name } : {}),
   };
 
@@ -100,14 +140,25 @@ export default async function ProdutoPage({ params }: PageProps) {
         <Gallery images={product.images} alt={product.name} />
 
         <div>
-          {category && (
-            <Link
-              href={`/produtos?categoria=${category.slug}`}
-              className="inline-flex items-center gap-1.5 rounded-full border border-brand-200 bg-brand-50 px-3 py-1 text-[11px] font-bold uppercase tracking-widest text-brand-700 transition-colors hover:border-brand-400"
-            >
-              {category.name}
-            </Link>
-          )}
+          <div className="flex flex-wrap items-center gap-2">
+            {product.montadora !== "Universal" && (
+              <Link
+                href={`/produtos?montadora=${montadoraSlug(product.montadora)}`}
+                className="inline-flex items-center gap-1.5 rounded-full border border-brand-700 bg-brand-900 px-3 py-1 text-[11px] font-bold uppercase tracking-widest text-white transition-colors hover:bg-brand-800"
+              >
+                <Factory className="h-3.5 w-3.5" />
+                {product.montadora}
+              </Link>
+            )}
+            {category && (
+              <Link
+                href={`/produtos?categoria=${category.slug}`}
+                className="inline-flex items-center gap-1.5 rounded-full border border-brand-200 bg-brand-50 px-3 py-1 text-[11px] font-bold uppercase tracking-widest text-brand-700 transition-colors hover:border-brand-400"
+              >
+                {category.name}
+              </Link>
+            )}
+          </div>
 
           <h1 className="mt-3 font-display text-2xl font-extrabold leading-tight text-graphite-900 md:text-3xl">
             {product.name}
@@ -127,34 +178,43 @@ export default async function ProdutoPage({ params }: PageProps) {
             {product.shortDescription}
           </p>
 
-          {/* Ficha técnica ao lado da foto */}
-          {product.specs.length > 0 && (
-            <div className="mt-5 overflow-hidden rounded-lg border border-graphite-200 bg-white shadow-soft">
-              <p className="border-b border-graphite-200 bg-graphite-50/70 px-5 py-2.5 text-[11px] font-bold uppercase tracking-widest text-graphite-700">
+          {/* DESCRIÇÃO — ficha técnica no formato do cliente (print-friendly) */}
+          <div className="mt-5 overflow-hidden rounded-lg border border-graphite-300 bg-white shadow-soft">
+            <div className="flex items-center justify-between border-b-2 border-brand-900 bg-graphite-50 px-5 py-3">
+              <h2 className="font-display text-sm font-extrabold uppercase tracking-widest text-brand-900">
+                Descrição
+              </h2>
+              <span className="hidden text-[11px] font-bold uppercase tracking-wide text-accent-600 sm:inline">
                 Ficha técnica
-              </p>
-              <table className="w-full text-sm">
-                <tbody>
-                  {product.specs.map((spec, i) => (
-                    <tr
-                      key={spec.label}
-                      className={i % 2 === 0 ? "bg-graphite-50/40" : ""}
-                    >
-                      <th
-                        scope="row"
-                        className="w-2/5 px-5 py-3 text-left font-semibold text-graphite-800"
-                      >
-                        {spec.label}
-                      </th>
-                      <td className="px-5 py-3 text-graphite-600">
-                        {spec.value}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+              </span>
             </div>
-          )}
+            <table className="w-full text-sm">
+              <tbody>
+                {fichaRows.map((row) => (
+                  <tr
+                    key={row.label}
+                    className="border-b border-graphite-100 last:border-0"
+                  >
+                    <th
+                      scope="row"
+                      className="w-[42%] bg-graphite-50/70 px-5 py-3 text-left align-top text-[11px] font-bold uppercase tracking-wide text-graphite-500"
+                    >
+                      {row.label}
+                    </th>
+                    <td
+                      className={cn(
+                        "px-5 py-3 align-top font-semibold text-graphite-900",
+                        row.label === "Código Manguebras" &&
+                          "font-display text-base font-extrabold text-brand-900",
+                      )}
+                    >
+                      {row.value}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
 
           {/* Bloco de consulta (sem venda) */}
           <div className="mt-5 rounded-lg border border-brand-200 bg-brand-50/60 p-6">
@@ -201,71 +261,22 @@ export default async function ProdutoPage({ params }: PageProps) {
         </div>
       </div>
 
-      {/* Abas de detalhes */}
+      {/* Sobre a peça */}
       <section className="border-t border-graphite-200 bg-graphite-50">
         <div className="container-page py-12">
-          <Tabs defaultValue="descricao">
-            <TabsList className="h-auto w-full justify-start gap-1 overflow-x-auto rounded-md bg-white p-1.5 shadow-soft">
-              <TabsTrigger
-                value="descricao"
-                className="rounded-lg px-5 py-2.5 text-xs font-bold uppercase tracking-widest data-[state=active]:bg-brand-900 data-[state=active]:text-white"
-              >
-                Descrição
-              </TabsTrigger>
-              <TabsTrigger
-                value="compatibilidade"
-                className="rounded-lg px-5 py-2.5 text-xs font-bold uppercase tracking-widest data-[state=active]:bg-brand-900 data-[state=active]:text-white"
-              >
-                Compatibilidade
-              </TabsTrigger>
-            </TabsList>
-
-            <TabsContent value="descricao" className="mt-5">
-              <div className="rounded-lg border border-graphite-200 bg-white p-6 shadow-soft md:p-8">
-                <p className="max-w-3xl text-sm leading-relaxed text-graphite-600">
-                  {product.description}
-                </p>
-              </div>
-            </TabsContent>
-
-            <TabsContent value="compatibilidade" className="mt-5">
-              <div className="overflow-hidden rounded-lg border border-graphite-200 bg-white shadow-soft">
-                <div className="overflow-x-auto">
-                  <table className="w-full text-sm">
-                    <thead>
-                      <tr className="bg-brand-950 text-left text-[11px] font-bold uppercase tracking-widest text-white">
-                        <th className="px-6 py-3">Veículo</th>
-                        <th className="px-6 py-3">Anos</th>
-                        <th className="px-6 py-3">Cód. original</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {product.applications.map((app, i) => (
-                        <tr
-                          key={`${app.vehicle}-${i}`}
-                          className={i % 2 === 0 ? "" : "bg-graphite-50/60"}
-                        >
-                          <td className="px-6 py-3.5 font-semibold text-graphite-800">
-                            {app.vehicle}
-                          </td>
-                          <td className="px-6 py-3.5 text-graphite-600">
-                            {app.years ?? "—"}
-                          </td>
-                          <td className="px-6 py-3.5 text-graphite-600">
-                            {app.oemCode ?? "Sob consulta"}
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-                <p className="border-t border-graphite-200 px-6 py-4 text-xs text-graphite-500">
-                  Não achou seu modelo? Envie uma foto da amostra no WhatsApp
-                  que nossa equipe confirma a aplicação.
-                </p>
-              </div>
-            </TabsContent>
-          </Tabs>
+          <h2 className="font-display text-lg font-extrabold uppercase tracking-wide text-graphite-900">
+            Sobre a <span className="text-accent-500">peça</span>
+          </h2>
+          <div className="mt-4 rounded-lg border border-graphite-200 bg-white p-6 shadow-soft md:p-8">
+            <p className="max-w-3xl text-sm leading-relaxed text-graphite-600">
+              {product.description}
+            </p>
+            <p className="mt-5 border-t border-graphite-100 pt-5 text-xs text-graphite-500">
+              Não tem certeza se é a peça certa para o seu veículo? Envie uma
+              foto da amostra no WhatsApp com o modelo do caminhão — nossa
+              equipe confirma a aplicação para você.
+            </p>
+          </div>
         </div>
       </section>
 
