@@ -1,5 +1,6 @@
 import { PRODUCTS } from "@/data/products";
 import { getCategory } from "@/data/categories";
+import { getMontadora, MONTADORAS } from "@/data/montadoras";
 import type { CategorySlug, Product, ProductLine } from "@/types/product";
 
 export type SortKey = "relevancia" | "a-z" | "novidades";
@@ -45,29 +46,26 @@ export function montadoraSlug(name: string): string {
 export interface MontadoraEntry {
   slug: string;
   name: string;
+  /** Nº de produtos cadastrados desta montadora (0 até vir a planilha do ERP) */
   count: number;
 }
 
-/** Lista de montadoras do catálogo, com contagem, em ordem alfabética. */
+/**
+ * Lista mestre de montadoras atendidas (todas as marcas do catálogo do cliente),
+ * com a contagem de produtos já cadastrados de cada uma.
+ */
 export function listMontadoras(): MontadoraEntry[] {
-  const map = new Map<string, MontadoraEntry>();
+  const counts = new Map<string, number>();
   for (const p of PRODUCTS) {
     const slug = montadoraSlug(p.montadora);
-    const entry = map.get(slug) ?? { slug, name: p.montadora, count: 0 };
-    entry.count += 1;
-    map.set(slug, entry);
+    counts.set(slug, (counts.get(slug) ?? 0) + 1);
   }
-  return [...map.values()].sort((a, b) => {
-    // "Universal" sempre por último; demais em ordem alfabética.
-    if (a.name === "Universal") return 1;
-    if (b.name === "Universal") return -1;
-    return a.name.localeCompare(b.name, "pt-BR");
-  });
+  return MONTADORAS.map((m) => ({ ...m, count: counts.get(m.slug) ?? 0 }));
 }
 
 /** Nome de exibição de uma montadora a partir do slug. */
 export function montadoraName(slug: string): string | undefined {
-  return listMontadoras().find((m) => m.slug === slug)?.name;
+  return getMontadora(slug)?.name;
 }
 
 type RawParams = Record<string, string | string[] | undefined>;
@@ -85,9 +83,7 @@ export function parseCatalogParams(params: RawParams): CatalogQuery {
 
   const montadoraRaw = first(params.montadora);
   const montadora =
-    montadoraRaw && listMontadoras().some((m) => m.slug === montadoraRaw)
-      ? montadoraRaw
-      : undefined;
+    montadoraRaw && getMontadora(montadoraRaw) ? montadoraRaw : undefined;
 
   const linhaRaw = first(params.linha) as ProductLine | undefined;
   const linha =

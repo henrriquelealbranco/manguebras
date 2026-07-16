@@ -117,7 +117,6 @@ export function FilterPanel({ active }: { active: ActiveFilters }) {
   const { setParam, isPending } = useSetParam();
   const activeCategoria = active.categoria ?? "";
   const activeMontadora = active.montadora ?? "";
-  const activeLinha = active.linha ?? "";
 
   const montadoras = useMemo(() => listMontadoras(), []);
 
@@ -125,16 +124,6 @@ export function FilterPanel({ active }: { active: ActiveFilters }) {
     const counts = new Map<string, number>();
     for (const p of PRODUCTS) {
       counts.set(p.category, (counts.get(p.category) ?? 0) + 1);
-    }
-    return counts;
-  }, []);
-
-  const lineCounts = useMemo(() => {
-    const counts = new Map<string, number>();
-    for (const p of PRODUCTS) {
-      for (const line of p.lines) {
-        counts.set(line, (counts.get(line) ?? 0) + 1);
-      }
     }
     return counts;
   }, []);
@@ -148,12 +137,12 @@ export function FilterPanel({ active }: { active: ActiveFilters }) {
       )}
     >
       <FilterGroup title="Montadoras">
-        <div className="space-y-0.5">
+        <div className="scrollbar-none max-h-72 space-y-0.5 overflow-y-auto pr-1">
           {montadoras.map((m) => (
             <FilterOption
               key={m.slug}
               label={m.name}
-              count={m.count}
+              count={m.count || undefined}
               active={activeMontadora === m.slug}
               onClick={() =>
                 setParam("montadora", activeMontadora === m.slug ? null : m.slug)
@@ -176,22 +165,6 @@ export function FilterPanel({ active }: { active: ActiveFilters }) {
                   "categoria",
                   activeCategoria === category.slug ? null : category.slug,
                 )
-              }
-            />
-          ))}
-        </div>
-      </FilterGroup>
-
-      <FilterGroup title="Linhas">
-        <div className="space-y-0.5">
-          {(Object.keys(LINE_LABELS) as ProductLine[]).map((line) => (
-            <FilterOption
-              key={line}
-              label={LINE_LABELS[line]}
-              count={lineCounts.get(line) ?? 0}
-              active={activeLinha === line}
-              onClick={() =>
-                setParam("linha", activeLinha === line ? null : line)
               }
             />
           ))}

@@ -81,7 +81,7 @@ export function CategoriesMenu() {
         onClick={() => setOpen((v) => !v)}
         className={cn(
           "flex h-12 items-center gap-2.5 border-x border-graphite-200 px-4 text-xs font-bold uppercase tracking-wide text-graphite-800 transition-colors sm:px-5",
-          open ? "bg-graphite-100" : "bg-graphite-50 hover:bg-graphite-100",
+          open ? "bg-graphite-50" : "bg-white hover:bg-graphite-50",
         )}
       >
         <AlignJustify className="h-4 w-4 text-accent-600" />
@@ -145,16 +145,18 @@ export function CategoriesMenu() {
             <p className="mb-3 text-[11px] font-bold uppercase tracking-widest text-graphite-400">
               Montadoras
             </p>
-            <ul className="space-y-0.5">
+            <ul className="scrollbar-none max-h-[320px] space-y-0.5 overflow-y-auto pr-1">
               {listMontadoras().map((m) => (
                 <li key={m.slug}>
                   <Link
                     href={`/produtos?montadora=${m.slug}`}
                     onClick={() => setOpen(false)}
-                    className="flex items-center justify-between gap-2 rounded-md px-3 py-2 text-sm font-medium text-graphite-700 transition-colors hover:bg-brand-50 hover:text-brand-800"
+                    className="flex items-center justify-between gap-2 rounded-md px-3 py-1.5 text-sm font-medium text-graphite-700 transition-colors hover:bg-brand-50 hover:text-brand-800"
                   >
                     {m.name}
-                    <span className="text-xs text-graphite-400">{m.count}</span>
+                    {m.count > 0 && (
+                      <span className="text-xs text-graphite-400">{m.count}</span>
+                    )}
                   </Link>
                 </li>
               ))}

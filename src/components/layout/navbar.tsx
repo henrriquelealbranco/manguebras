@@ -15,8 +15,7 @@ import { SearchAutocomplete } from "@/components/search/search-autocomplete";
 import { SITE, whatsappLink } from "@/constants/site";
 
 const LINE_LINKS = [
-  { href: "/produtos?linha=diesel", label: "Linha Diesel" },
-  { href: "/produtos?linha=pesada", label: "Linha Pesada" },
+  { href: "/produtos", label: "Produtos" },
   { href: "/produtos?ordenar=novidades", label: "Lançamentos" },
   { href: "/sobre", label: "Quem Somos" },
   { href: "/contato", label: "Contato" },
@@ -107,7 +106,7 @@ export function Navbar() {
       </div>
 
       {/* 2 ─ Faixa principal */}
-      <div className="border-b border-graphite-200 bg-white">
+      <div className="border-b border-graphite-200 bg-graphite-100">
         <div className="container-page flex flex-wrap items-center gap-x-8 gap-y-4 py-4 lg:flex-nowrap">
           <div className="flex flex-1 items-center justify-between lg:flex-none">
             <Logo variant="color" priority className="[&_img]:h-11 md:[&_img]:h-12" />
@@ -134,7 +133,7 @@ export function Navbar() {
       {/* 3 ─ Faixa de navegação */}
       <nav
         aria-label="Navegação principal"
-        className="sticky top-0 z-50 border-b border-graphite-200 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/80"
+        className="sticky top-0 z-50 border-b border-graphite-200 bg-graphite-100/95 backdrop-blur supports-[backdrop-filter]:bg-graphite-100/80"
       >
         <div className="container-page relative flex items-center gap-1">
           <CategoriesMenu />

@@ -6,11 +6,11 @@ import { listMontadoras } from "@/lib/catalog";
 
 /**
  * Seção "Navegue pela sua montadora" — o cliente encontra a peça pela marca
- * do veículo (Scania, Volvo, Mercedes-Benz…), como no site atual da Manguebras.
+ * do veículo, com TODAS as montadoras atendidas pela Manguebras (mesma
+ * organização do site atual). Tiles compactos para caber a lista completa.
  */
 export function CategoryLines() {
-  // Montadoras reais (exclui "Universal") + card do catálogo completo.
-  const montadoras = listMontadoras().filter((m) => m.name !== "Universal");
+  const montadoras = listMontadoras();
 
   return (
     <section aria-label="Navegue pela montadora" className="bg-brand-950">
@@ -22,58 +22,35 @@ export function CategoryLines() {
           linkHref="/produtos"
           linkLabel="Ver catálogo completo"
         />
-        <div className="mt-7 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-          {montadoras.map((m, i) => (
-            <Reveal key={m.slug} delay={i * 0.06}>
-              <Link
-                href={`/produtos?montadora=${m.slug}`}
-                className="group relative flex h-full items-center gap-4 overflow-hidden rounded-md border border-white/10 bg-white/[0.04] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-accent-400/50 hover:bg-white/[0.07] hover:shadow-elevated"
-              >
-                <div
-                  aria-hidden
-                  className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-                  style={{
-                    background:
-                      "radial-gradient(240px circle at 85% 15%, rgba(44,196,175,0.15), transparent 60%)",
-                  }}
-                />
-                <span className="relative flex h-14 w-14 shrink-0 items-center justify-center rounded-full border border-accent-400/50 text-accent-400 transition-colors duration-300 group-hover:bg-accent-500 group-hover:text-white">
-                  <Truck className="h-6 w-6" />
-                </span>
-                <div className="relative">
-                  <p className="text-sm font-bold uppercase tracking-wide text-white">
-                    {m.name}
-                  </p>
-                  <p className="mt-1 inline-flex items-center gap-1.5 text-xs font-semibold text-accent-400">
-                    Ver peças
-                    <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
-                  </p>
-                </div>
-              </Link>
-            </Reveal>
-          ))}
+        <p className="mt-2 max-w-xl text-sm text-brand-200">
+          Encontre a peça certa pela marca do seu veículo — atendemos as
+          principais montadoras da linha diesel/pesada.
+        </p>
 
-          {/* Card do catálogo completo */}
-          <Reveal delay={montadoras.length * 0.06}>
+        <Reveal>
+          <div className="mt-7 grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+            {montadoras.map((m) => (
+              <Link
+                key={m.slug}
+                href={`/produtos?montadora=${m.slug}`}
+                className="group flex items-center gap-2.5 rounded-md border border-white/10 bg-white/[0.04] px-3.5 py-3 text-sm font-semibold text-white/90 transition-all duration-200 hover:border-accent-400/50 hover:bg-white/[0.08] hover:text-white"
+              >
+                <Truck className="h-4 w-4 shrink-0 text-accent-400" />
+                <span className="truncate">{m.name}</span>
+              </Link>
+            ))}
+
+            {/* Catálogo completo */}
             <Link
               href="/produtos"
-              className="group relative flex h-full items-center gap-4 overflow-hidden rounded-md border border-accent-400/30 bg-accent-500/10 p-6 transition-all duration-300 hover:-translate-y-1 hover:border-accent-400/60 hover:bg-accent-500/15 hover:shadow-elevated"
+              className="group flex items-center gap-2.5 rounded-md border border-accent-400/40 bg-accent-500/10 px-3.5 py-3 text-sm font-bold text-white transition-all duration-200 hover:border-accent-400/70 hover:bg-accent-500/20"
             >
-              <span className="relative flex h-14 w-14 shrink-0 items-center justify-center rounded-full border border-accent-400/60 text-accent-300 transition-colors duration-300 group-hover:bg-accent-500 group-hover:text-white">
-                <Boxes className="h-6 w-6" />
-              </span>
-              <div className="relative">
-                <p className="text-sm font-bold uppercase tracking-wide text-white">
-                  Todo o catálogo
-                </p>
-                <p className="mt-1 inline-flex items-center gap-1.5 text-xs font-semibold text-accent-300">
-                  Ver todos os produtos
-                  <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
-                </p>
-              </div>
+              <Boxes className="h-4 w-4 shrink-0 text-accent-300" />
+              <span className="truncate">Todo o catálogo</span>
+              <ArrowRight className="ml-auto h-3.5 w-3.5 text-accent-300 transition-transform duration-200 group-hover:translate-x-0.5" />
             </Link>
-          </Reveal>
-        </div>
+          </div>
+        </Reveal>
       </div>
     </section>
   );
