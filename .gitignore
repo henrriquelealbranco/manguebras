@@ -27,3 +27,9 @@ next-env.d.ts
 
 # materiais brutos do cliente (389MB de fotos — fora do repo)
 /_materiais/
+
+.vercel
+.env*
+
+# cache bruto do scraper (regenerável — 13MB)
+scripts/.cache-catalogo-bruto.json

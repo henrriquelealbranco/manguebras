@@ -1,0 +1,17 @@
+# materiais brutos do cliente (389MB de fotos — fora do deploy)
+_materiais/
+
+# build artifacts / deps
+node_modules/
+.next/
+out/
+build/
+
+# tooling local, não faz parte do app
+.claude/
+.git/
+
+# arquivos soltos que não pertencem ao projeto
+k.html
+Manguebras - Atalho.lnk
+*.tsbuildinfo
