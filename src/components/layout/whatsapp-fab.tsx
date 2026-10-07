@@ -1,5 +1,8 @@
+"use client";
+
 import { MessageCircle } from "lucide-react";
 import { whatsappLink } from "@/constants/site";
+import { trackWhatsAppClick } from "@/lib/tracking";
 
 /**
  * Botão flutuante de WhatsApp — presente em todas as páginas.
@@ -11,6 +14,12 @@ export function WhatsAppFab() {
       href={whatsappLink(
         "Olá! Vim pelo site da Manguebras e preciso de ajuda com mangueiras.",
       )}
+      onClick={() =>
+        trackWhatsAppClick({
+          location: "floating_fab",
+          label: "Botão Flutuante WhatsApp",
+        })
+      }
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Falar com um especialista no WhatsApp"

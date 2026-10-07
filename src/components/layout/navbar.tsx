@@ -13,6 +13,7 @@ import { CategoriesMenu } from "@/components/layout/mega-menu";
 import { MobileMenu } from "@/components/layout/mobile-menu";
 import { SearchAutocomplete } from "@/components/search/search-autocomplete";
 import { SITE, whatsappLink } from "@/constants/site";
+import { trackWhatsAppClick } from "@/lib/tracking";
 
 const LINE_LINKS = [
   { href: "/produtos", label: "Produtos" },
@@ -46,12 +47,10 @@ function TrustBadge({
 }
 
 /**
- * Header global em 3 níveis — CATÁLOGO VIRTUAL (não é loja de venda online).
- * Cabeçalho CLARO (fundo branco, marca em verde) — o miolo escuro do site
- * (hero, seções, rodapé) permanece; só o topo foi clareado.
- * 1. barra utilitária — contatos e canal com representante
- * 2. faixa principal — logo, busca no catálogo, selos institucionais
- * 3. faixa de navegação — categorias + linhas
+ * Header global em 3 níveis com hierarquia visual e contraste claros:
+ * 1. Barra utilitária — contatos em graphite suave
+ * 2. Faixa principal — branca (bg-white) destacando logo, busca e selos
+ * 3. Faixa de navegação — com categorias e links de catálogo
  */
 export function Navbar() {
   return (
@@ -64,6 +63,12 @@ export function Navbar() {
               href={whatsappLink(
                 "Olá! Vim pelo site da Manguebras e quero um atendimento especializado.",
               )}
+              onClick={() =>
+                trackWhatsAppClick({
+                  location: "navbar_top",
+                  label: "Atendimento especializado",
+                })
+              }
               target="_blank"
               rel="noopener noreferrer"
               className="flex h-10 items-center gap-1.5 px-1.5 transition-colors hover:text-brand-700"
@@ -93,6 +98,12 @@ export function Navbar() {
               href={whatsappLink(
                 "Olá! Quero falar com um representante da Manguebras.",
               )}
+              onClick={() =>
+                trackWhatsAppClick({
+                  location: "navbar_top",
+                  label: "Falar com um representante",
+                })
+              }
               target="_blank"
               rel="noopener noreferrer"
               className="flex h-10 items-center gap-1.5 px-1.5 transition-colors hover:text-brand-700"
@@ -105,8 +116,8 @@ export function Navbar() {
         </div>
       </div>
 
-      {/* 2 ─ Faixa principal */}
-      <div className="border-b border-graphite-200 bg-graphite-100">
+      {/* 2 ─ Faixa principal (fundo branco para contraste com o topo) */}
+      <div className="border-b border-graphite-200/80 bg-white">
         <div className="container-page flex flex-wrap items-center gap-x-8 gap-y-4 py-4 lg:flex-nowrap">
           <div className="flex flex-1 items-center justify-between lg:flex-none">
             <Logo variant="color" priority className="[&_img]:h-11 md:[&_img]:h-12" />
@@ -133,7 +144,7 @@ export function Navbar() {
       {/* 3 ─ Faixa de navegação */}
       <nav
         aria-label="Navegação principal"
-        className="sticky top-0 z-50 border-b border-graphite-200 bg-graphite-100/95 backdrop-blur supports-[backdrop-filter]:bg-graphite-100/80"
+        className="sticky top-0 z-50 border-b border-graphite-200 bg-[#f9fafb]/95 backdrop-blur supports-[backdrop-filter]:bg-[#f9fafb]/85"
       >
         <div className="container-page relative flex items-center gap-1">
           <CategoriesMenu />

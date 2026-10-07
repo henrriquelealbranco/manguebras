@@ -9,7 +9,6 @@ import {
   Droplets,
   Gauge,
   Layers,
-  MessageCircle,
   Plug,
   Spline,
   Thermometer,
@@ -18,7 +17,6 @@ import {
 } from "lucide-react";
 import { CATEGORIES } from "@/data/categories";
 import { listMontadoras } from "@/lib/catalog";
-import { whatsappLink } from "@/constants/site";
 import { cn } from "@/lib/utils";
 import type { CategorySlug } from "@/types/product";
 
@@ -104,7 +102,7 @@ export function CategoriesMenu() {
             : "invisible -translate-y-2 opacity-0",
         )}
       >
-        <div className="container-page grid gap-8 py-8 lg:grid-cols-[1fr_230px_280px]">
+        <div className="container-page grid gap-8 py-8 lg:grid-cols-[1fr_360px]">
           <nav aria-label="Categorias de produtos">
             <p className="mb-3 text-[11px] font-bold uppercase tracking-widest text-graphite-400">
               Categorias
@@ -137,62 +135,47 @@ export function CategoriesMenu() {
             </ul>
           </nav>
 
-          {/* Montadoras — navegação pela marca do veículo (site atual) */}
+          {/* Montadoras — layout melhorado com linhas alternadas e contagem nítida */}
           <nav
             aria-label="Montadoras"
             className="hidden border-l border-graphite-200/70 pl-8 lg:block"
           >
-            <p className="mb-3 text-[11px] font-bold uppercase tracking-widest text-graphite-400">
-              Montadoras
-            </p>
-            <ul className="scrollbar-none max-h-[320px] space-y-0.5 overflow-y-auto pr-1">
-              {listMontadoras().map((m) => (
+            <div className="mb-3 flex items-center justify-between">
+              <p className="text-[11px] font-bold uppercase tracking-widest text-graphite-400">
+                Montadoras (Linha Diesel)
+              </p>
+              <Link
+                href="/produtos"
+                onClick={() => setOpen(false)}
+                className="text-xs font-semibold text-brand-700 hover:text-brand-900"
+              >
+                Ver todas →
+              </Link>
+            </div>
+            <ul className="scrollbar-none max-h-[340px] space-y-1 overflow-y-auto pr-1">
+              {listMontadoras().map((m, idx) => (
                 <li key={m.slug}>
                   <Link
                     href={`/produtos?montadora=${m.slug}`}
                     onClick={() => setOpen(false)}
-                    className="flex items-center justify-between gap-2 rounded-md px-3 py-1.5 text-sm font-medium text-graphite-700 transition-colors hover:bg-brand-50 hover:text-brand-800"
+                    className={cn(
+                      "flex items-center justify-between gap-2 rounded-md px-3 py-2 text-sm font-medium transition-colors hover:bg-brand-100/70 hover:text-brand-900",
+                      idx % 2 === 0
+                        ? "bg-graphite-50/70 text-graphite-800"
+                        : "bg-white text-graphite-700",
+                    )}
                   >
-                    {m.name}
+                    <span>{m.name}</span>
                     {m.count > 0 && (
-                      <span className="text-xs text-graphite-400">{m.count}</span>
+                      <span className="rounded-full bg-graphite-200/70 px-2 py-0.5 text-xs font-semibold text-graphite-600">
+                        {m.count}
+                      </span>
                     )}
                   </Link>
                 </li>
               ))}
             </ul>
           </nav>
-
-          {/* CTA lateral — dor nº 1 do cliente */}
-          <aside className="relative hidden overflow-hidden rounded-lg bg-brand-950 p-6 lg:flex lg:flex-col lg:justify-between">
-            <div
-              aria-hidden
-              className="pointer-events-none absolute inset-0 opacity-50"
-              style={{
-                background:
-                  "radial-gradient(400px circle at 80% 0%, rgba(44,196,175,0.3), transparent 60%)",
-              }}
-            />
-            <div className="relative">
-              <p className="text-xs font-semibold uppercase tracking-widest text-accent-400">
-                Não encontrou a peça?
-              </p>
-              <p className="mt-2 font-display text-lg font-bold leading-snug text-white">
-                Envie uma foto da amostra e encontramos a mangueira certa.
-              </p>
-            </div>
-            <a
-              href={whatsappLink(
-                "Olá! Tenho uma mangueira que preciso identificar. Posso enviar uma foto?",
-              )}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="relative mt-6 inline-flex items-center justify-center gap-2 rounded-sm bg-action-500 px-4 py-3 text-sm font-semibold text-white transition-all duration-200 hover:bg-action-600 active:bg-action-700 hover:shadow-elevated"
-            >
-              <MessageCircle className="h-4 w-4" />
-              Falar com especialista
-            </a>
-          </aside>
         </div>
       </div>
     </div>

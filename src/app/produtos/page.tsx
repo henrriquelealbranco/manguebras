@@ -9,6 +9,7 @@ import {
 } from "@/components/catalog/filters";
 import { ProductCard } from "@/components/product/product-card";
 import { getCategory } from "@/data/categories";
+import { CatalogSearchBar } from "@/components/catalog/catalog-search-bar";
 import {
   LINE_LABELS,
   montadoraName,
@@ -63,7 +64,7 @@ function pageTitle(query: ReturnType<typeof parseCatalogParams>): {
     pre: "Catálogo",
     highlight: "completo",
     description:
-      "Mangueiras, abraçadeiras, juntas e acessórios para a linha diesel — tudo em um só lugar.",
+      "Aqui você encontra todo o mix de produtos para a linha diesel — mangueiras, abraçadeiras, juntas e acessórios em um só lugar.",
   };
 }
 
@@ -154,6 +155,11 @@ export default async function ProdutosPage({ searchParams }: PageProps) {
         </aside>
 
         <div>
+          {/* Campo de busca dedicado do catálogo (solicitado nos vídeos) */}
+          <div className="mb-5">
+            <CatalogSearchBar initialQuery={query.q} />
+          </div>
+
           {/* Toolbar */}
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div className="flex items-center gap-3">

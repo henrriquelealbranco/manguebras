@@ -238,7 +238,7 @@ export function Hero() {
         {/* ── Coluna 3 — Benefícios técnicos (micro-cards) ── */}
         <div className="relative z-10 flex flex-col gap-3">
           <p className="mb-1 hidden text-[10px] font-bold uppercase tracking-[0.25em] text-brand-400 lg:block">
-            Engenharia
+            Padrão de Qualidade
           </p>
           <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
             {BENEFITS.map((benefit) => (

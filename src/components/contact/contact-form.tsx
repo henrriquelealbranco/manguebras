@@ -8,6 +8,7 @@ import { toast } from "sonner";
 import { maskPhone } from "@/lib/masks";
 import { cn } from "@/lib/utils";
 import { whatsappLink } from "@/constants/site";
+import { trackFormLead } from "@/lib/tracking";
 
 const contactSchema = z.object({
   nome: z.string().trim().min(3, "Informe seu nome"),
@@ -28,8 +29,8 @@ const inputClass =
   "h-11 w-full rounded-lg border border-graphite-300 bg-white px-3 text-sm text-graphite-900 outline-none transition-colors placeholder:text-graphite-400 focus:border-accent-500";
 
 /**
- * Formulário de contato — valida e encaminha a conversa para o WhatsApp,
- * canal principal de atendimento da Manguebras.
+ * Formulário de contato — valida, dispara lead no GTM e Meta CAPI (com event_id)
+ * e encaminha a conversa para o WhatsApp.
  */
 export function ContactForm() {
   const {
@@ -40,7 +41,16 @@ export function ContactForm() {
     formState: { errors, isSubmitting },
   } = useForm<ContactData>({ resolver: zodResolver(contactSchema) });
 
-  const onSubmit = (data: ContactData) => {
+  const onSubmit = async (data: ContactData) => {
+    // Dispara evento de Lead no GTM e Meta CAPI com deduplicação
+    trackFormLead({
+      formName: "contact_form",
+      name: data.nome,
+      phone: data.telefone,
+      assunto: data.assunto,
+      mensagem: data.mensagem,
+    });
+
     const message = [
       `Olá! Vim pelo site (página de contato).`,
       `*Nome:* ${data.nome}`,
