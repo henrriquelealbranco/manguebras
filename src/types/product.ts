@@ -9,14 +9,14 @@
  */
 
 export type CategorySlug =
-  | "mangueiras-radiador"
-  | "mangueiras-intercooler"
-  | "mangueiras-moldadas"
-  | "mangueiras-silicone"
-  | "abracadeiras"
-  | "juntas-vedacao"
-  | "conexoes"
-  | "acessorios";
+  | "mangueiras-caminhoes-onibus"
+  | "mangueiras-turbinas"
+  | "mangueiras-pick-ups"
+  | "mangueiras-vans"
+  | "mangueiras-agricolas-empilhadeiras"
+  | "mangueiras-geral"
+  | "pecas-acessorios"
+  | "miudezas-diesel";
 
 /**
  * Linha de aplicação. A Manguebras trabalha apenas a linha diesel/pesada

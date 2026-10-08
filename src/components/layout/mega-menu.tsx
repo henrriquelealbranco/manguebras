@@ -4,14 +4,14 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import {
   AlignJustify,
+  Boxes,
+  Bus,
+  Car,
   ChevronDown,
-  CircleDot,
-  Droplets,
   Gauge,
-  Layers,
-  Plug,
   Spline,
-  Thermometer,
+  Tractor,
+  Truck,
   Wrench,
   type LucideIcon,
 } from "lucide-react";
@@ -21,14 +21,14 @@ import { cn } from "@/lib/utils";
 import type { CategorySlug } from "@/types/product";
 
 const CATEGORY_ICONS: Record<CategorySlug, LucideIcon> = {
-  "mangueiras-radiador": Thermometer,
-  "mangueiras-intercooler": Gauge,
-  "mangueiras-moldadas": Spline,
-  "mangueiras-silicone": Droplets,
-  abracadeiras: CircleDot,
-  "juntas-vedacao": Layers,
-  conexoes: Plug,
-  acessorios: Wrench,
+  "mangueiras-caminhoes-onibus": Truck,
+  "mangueiras-turbinas": Gauge,
+  "mangueiras-pick-ups": Car,
+  "mangueiras-vans": Bus,
+  "mangueiras-agricolas-empilhadeiras": Tractor,
+  "mangueiras-geral": Spline,
+  "pecas-acessorios": Wrench,
+  "miudezas-diesel": Boxes,
 };
 
 /**

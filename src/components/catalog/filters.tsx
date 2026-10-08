@@ -136,22 +136,6 @@ export function FilterPanel({ active }: { active: ActiveFilters }) {
         isPending && "pointer-events-none opacity-60",
       )}
     >
-      <FilterGroup title="Montadoras">
-        <div className="scrollbar-none max-h-72 space-y-0.5 overflow-y-auto pr-1">
-          {montadoras.map((m) => (
-            <FilterOption
-              key={m.slug}
-              label={m.name}
-              count={m.count || undefined}
-              active={activeMontadora === m.slug}
-              onClick={() =>
-                setParam("montadora", activeMontadora === m.slug ? null : m.slug)
-              }
-            />
-          ))}
-        </div>
-      </FilterGroup>
-
       <FilterGroup title="Categorias">
         <div className="space-y-0.5">
           {CATEGORIES.map((category) => (
@@ -165,6 +149,22 @@ export function FilterPanel({ active }: { active: ActiveFilters }) {
                   "categoria",
                   activeCategoria === category.slug ? null : category.slug,
                 )
+              }
+            />
+          ))}
+        </div>
+      </FilterGroup>
+
+      <FilterGroup title="Montadoras">
+        <div className="scrollbar-none max-h-72 space-y-0.5 overflow-y-auto pr-1">
+          {montadoras.map((m) => (
+            <FilterOption
+              key={m.slug}
+              label={m.name}
+              count={m.count || undefined}
+              active={activeMontadora === m.slug}
+              onClick={() =>
+                setParam("montadora", activeMontadora === m.slug ? null : m.slug)
               }
             />
           ))}

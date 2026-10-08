@@ -1,73 +1,72 @@
 import type { Category } from "@/types/product";
 
 /**
- * Categorias do catálogo Manguebras.
- * As faixas de SKU correspondem à organização do acervo de fotos do cliente.
+ * Categorias definitivas do catálogo Manguebras (conforme catálogo impresso oficial).
  */
 export const CATEGORIES: Category[] = [
   {
-    slug: "mangueiras-radiador",
-    name: "Mangueiras de Radiador",
+    slug: "mangueiras-caminhoes-onibus",
+    name: "Mangueiras Caminhões e Ônibus",
     description:
-      "Curvas e retas para o sistema de arrefecimento de caminhões, ônibus e máquinas.",
+      "Linha pesada de arrefecimento e fluidos para caminhões e ônibus.",
     image: "/produtos/capas/mangueiras-radiador.jpg",
-    skuRange: "5000–5999",
+    skuRange: "pesada",
   },
   {
-    slug: "mangueiras-intercooler",
-    name: "Mangueiras de Intercooler",
+    slug: "mangueiras-turbinas",
+    name: "Mangueiras Turbinas",
     description:
-      "Silicone gomo com anéis metálicos, projetadas para a pressão do turbo.",
+      "Intercooler, turbo e mangueiras de alta pressão e temperatura.",
     image: "/produtos/capas/mangueiras-intercooler.jpg",
-    skuRange: "3000–3999",
+    skuRange: "turbo",
   },
   {
-    slug: "mangueiras-moldadas",
-    name: "Mangueiras Moldadas",
+    slug: "mangueiras-pick-ups",
+    name: "Mangueiras Pick-ups",
     description:
-      "EPDM moldadas no formato original de cada veículo — encaixe perfeito.",
+      "Mangueiras e arrefecimento para caminhonetes e pick-ups da linha diesel.",
     image: "/produtos/capas/mangueiras-moldadas.jpg",
-    skuRange: "2000–2999",
+    skuRange: "pick-ups",
   },
   {
-    slug: "mangueiras-silicone",
-    name: "Silicone Premium",
+    slug: "mangueiras-vans",
+    name: "Mangueiras Vans",
     description:
-      "Linha azul de alta temperatura para máxima durabilidade e performance.",
+      "Linha completa para vans, furgões e utilitários comerciais.",
     image: "/produtos/capas/mangueiras-silicone.jpg",
-    skuRange: "6000–6999",
+    skuRange: "vans",
   },
   {
-    slug: "abracadeiras",
-    name: "Abraçadeiras",
+    slug: "mangueiras-agricolas-empilhadeiras",
+    name: "Mangueiras Agrícolas e Empilhadeiras",
     description:
-      "Rosca sem fim, T-bolt e mola — fixação segura para qualquer diâmetro.",
+      "Aplicações para tratores, máquinas agrícolas e empilhadeiras.",
+    image: "/produtos/capas/mangueiras-radiador.jpg",
+    skuRange: "agricola",
+  },
+  {
+    slug: "mangueiras-geral",
+    name: "Mangueiras Geral",
+    description:
+      "Mangueiras retas, lonadas, sucção, ar/água, combustível e flexíveis.",
+    image: "/produtos/capas/mangueiras-silicone.jpg",
+    skuRange: "geral",
+  },
+  {
+    slug: "pecas-acessorios",
+    name: "Peças e Acessórios",
+    description:
+      "Abraçadeiras, tanques de expansão, coxins, defletores, tampas e conexões.",
     image: "/produtos/capas/abracadeiras.jpg",
-    skuRange: "1000–1999",
+    skuRange: "acessorios",
   },
   {
-    slug: "juntas-vedacao",
-    name: "Juntas & Vedação",
+    slug: "miudezas-diesel",
+    name: "Miudezas Diesel",
     description:
-      "Kits de juntas e retentores para motor, câmbio e diferencial.",
+      "Anéis de vedação, juntas, retentores, jet coolers e miudezas em geral.",
     image: "/produtos/capas/juntas-vedacao.jpg",
-    skuRange: "4000–4999",
-  },
-  {
-    slug: "conexoes",
-    name: "Conexões & Adaptadores",
-    description:
-      "Terminais, engates rápidos e adaptadores para linhas de fluido.",
-    image: "/produtos/capas/conexoes.jpg",
-    skuRange: "diversos",
-  },
-  {
-    slug: "acessorios",
-    name: "Acessórios",
-    description:
-      "Tanques de expansão, coxins, defletores, tampas e purificadores.",
-    image: "/produtos/capas/acessorios.jpg",
-    skuRange: "diversos",
+    skuRange: "miudezas",
   },
 ];
 
