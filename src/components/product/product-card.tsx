@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, MessageCircle } from "lucide-react";
+import { ArrowRight, MessageCircle, PackageSearch } from "lucide-react";
 import { whatsappLink } from "@/constants/site";
 import type { Product } from "@/types/product";
 
@@ -15,19 +15,30 @@ interface ProductCardProps {
  * Estética industrial: bordas retas, sombra nítida, altura igual.
  */
 export function ProductCard({ product }: ProductCardProps) {
+  const hasImage = Boolean(product.images && product.images.length > 0 && product.images[0]);
+
   return (
     <article className="group flex h-full flex-col rounded-md border border-graphite-200 bg-white p-4 shadow-soft transition-all duration-200 hover:-translate-y-0.5 hover:border-brand-400 hover:shadow-card">
       <Link
         href={`/produtos/${product.slug}`}
-        className="relative mx-auto flex aspect-square w-full max-w-44 items-center justify-center overflow-hidden rounded-sm"
+        className="relative mx-auto flex aspect-square w-full max-w-44 items-center justify-center overflow-hidden rounded-sm bg-graphite-50/50"
       >
-        <Image
-          src={product.images[0]}
-          alt={product.name}
-          fill
-          sizes="(max-width: 640px) 45vw, 200px"
-          className="object-contain p-1 transition-transform duration-500 group-hover:scale-105"
-        />
+        {hasImage ? (
+          <Image
+            src={product.images[0]}
+            alt={product.name}
+            fill
+            sizes="(max-width: 640px) 45vw, 200px"
+            className="object-contain p-1 transition-transform duration-500 group-hover:scale-105"
+          />
+        ) : (
+          <div className="flex h-full w-full flex-col items-center justify-center p-3 text-center text-graphite-400">
+            <PackageSearch className="h-8 w-8 text-graphite-300" />
+            <span className="mt-1 text-[10px] font-semibold uppercase tracking-wider text-graphite-500">
+              Foto sob consulta
+            </span>
+          </div>
+        )}
       </Link>
 
       <div className="mt-3 flex flex-1 flex-col">
