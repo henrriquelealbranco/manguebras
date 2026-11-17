@@ -63,6 +63,7 @@ export function Navbar() {
               href={whatsappLink(
                 "Olá! Vim pelo site da Manguebras e quero um atendimento especializado.",
               )}
+              data-gtm-tracked="true"
               onClick={() =>
                 trackWhatsAppClick({
                   location: "navbar_top",
@@ -98,6 +99,7 @@ export function Navbar() {
               href={whatsappLink(
                 "Olá! Quero falar com um representante da Manguebras.",
               )}
+              data-gtm-tracked="true"
               onClick={() =>
                 trackWhatsAppClick({
                   location: "navbar_top",

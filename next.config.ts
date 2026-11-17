@@ -7,6 +7,8 @@ const nextConfig: NextConfig = {
   },
   poweredByHeader: false,
   reactStrictMode: true,
+  // Keep the 3,500+ static product pages within build-machine memory limits.
+  experimental: { cpus: 2 },
 };
 
 export default nextConfig;

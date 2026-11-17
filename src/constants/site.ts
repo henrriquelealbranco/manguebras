@@ -11,8 +11,8 @@ export const SITE = {
   url: "https://www.manguebras.com.br",
   phone: "(44) 3023-7100",
   phoneHref: "tel:+554430237100",
-  whatsapp: "(44) 99922-6668",
-  whatsappNumber: "5544999226668",
+  whatsapp: "(44) 3023-7100",
+  whatsappNumber: "554430237100",
   email: "vendas@manguebras.com.br",
   address: {
     city: "Maringá",
@@ -28,6 +28,17 @@ export const SITE = {
 /**
  * Gera um link de WhatsApp com mensagem pré-preenchida.
  */
-export function whatsappLink(message: string): string {
-  return `https://wa.me/${SITE.whatsappNumber}?text=${encodeURIComponent(message)}`;
+export const TINTIM_BASE = "https://tintim.link/whatsapp/893db8f7-97bb-43b2-a908-97fc95741ca0/c2b21e7b-42a9-4adc-9f81-a98660775b8f";
+export const WHATSAPP_MESSAGES = {
+  general: "Olá. Visitei seu site e gostaria de falar com um atendente.",
+  product: "Olá. Gostaria de mais informações sobre um produto que vi no site.",
+} as const;
+
+// Legacy callers may still supply copy; the approved greeting must remain exact.
+export function whatsappLink(_legacyMessage?: string): string {
+  return `${TINTIM_BASE}?text=${encodeURIComponent(WHATSAPP_MESSAGES.general)}`;
+}
+
+export function productWhatsappLink(): string {
+  return `${TINTIM_BASE}?text=${encodeURIComponent(WHATSAPP_MESSAGES.product)}`;
 }

@@ -8,7 +8,7 @@ import { toast } from "sonner";
 import { maskPhone } from "@/lib/masks";
 import { cn } from "@/lib/utils";
 import { whatsappLink } from "@/constants/site";
-import { trackFormLead } from "@/lib/tracking";
+import { trackFormLead, trackWhatsAppClick } from "@/lib/tracking";
 
 const contactSchema = z.object({
   nome: z.string().trim().min(3, "Informe seu nome"),
@@ -29,7 +29,7 @@ const inputClass =
   "h-11 w-full rounded-lg border border-graphite-300 bg-white px-3 text-sm text-graphite-900 outline-none transition-colors placeholder:text-graphite-400 focus:border-accent-500";
 
 /**
- * Formulário de contato — valida, dispara lead no GTM e Meta CAPI (com event_id)
+ * Formulário de contato — valida e dispara lead no GTM (sem dados pessoais)
  * e encaminha a conversa para o WhatsApp.
  */
 export function ContactForm() {
@@ -42,7 +42,7 @@ export function ContactForm() {
   } = useForm<ContactData>({ resolver: zodResolver(contactSchema) });
 
   const onSubmit = async (data: ContactData) => {
-    // Dispara evento de Lead no GTM e Meta CAPI com deduplicação
+    // Um lead representa o encaminhamento, não uma mensagem já enviada.
     trackFormLead({
       formName: "contact_form",
       name: data.nome,
@@ -51,15 +51,8 @@ export function ContactForm() {
       mensagem: data.mensagem,
     });
 
-    const message = [
-      `Olá! Vim pelo site (página de contato).`,
-      `*Nome:* ${data.nome}`,
-      `*Telefone:* ${data.telefone}`,
-      `*Assunto:* ${data.assunto}`,
-      "",
-      data.mensagem,
-    ].join("\n");
-    window.open(whatsappLink(message), "_blank", "noopener");
+    trackWhatsAppClick({ location: "contact_form", label: "Enviar mensagem" });
+    window.open(whatsappLink(), "_blank", "noopener,noreferrer");
     toast.success("Mensagem pronta!", {
       description: "Enviamos você para o WhatsApp para concluir o envio.",
     });

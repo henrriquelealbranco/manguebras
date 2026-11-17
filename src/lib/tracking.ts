@@ -1,9 +1,8 @@
 /**
- * Módulo de Rastreamento (GTM DataLayer + Meta CAPI)
+ * Eventos do site: encaminhados exclusivamente ao GTM DataLayer.
  *
  * - Container GTM: GTM-KRP4R7ZC
- * - Meta Pixel / Dataset ID: 2163255911232071
- * - Deduplicação entre Web (GTM) e Server-side (Meta CAPI) via event_id
+ * - As tags de mídia são administradas no GTM, sem disparos paralelos.
  */
 
 declare global {
@@ -43,9 +42,10 @@ export function trackWhatsAppClick(params: TrackWhatsAppParams) {
     event_id: eventId,
     click_location: params.location,
     button_label: params.label || "WhatsApp",
-    product_code: params.productCode,
-    product_name: params.productName,
-    montadora: params.montadora,
+    contact_type: params.productCode ? "product" : "general",
+    product_code: params.productCode || null,
+    product_name: params.productName || null,
+    montadora: params.montadora || null,
     timestamp: new Date().toISOString(),
   });
 
@@ -64,7 +64,8 @@ export interface LeadData {
 
 /**
  * Rastreia envio concluído de formulário (Lead).
- * Dispara evento 'lead' / 'form_submit' no GTM e envia em paralelo para a Meta CAPI com o mesmo event_id.
+ * Dispara 'lead' no GTM ao encaminhar o formulário ao WhatsApp.
+ * Não significa que a mensagem foi enviada ou que houve venda.
  */
 export async function trackFormLead(data: LeadData): Promise<string> {
   const eventId = generateEventId("lead");
@@ -74,39 +75,9 @@ export async function trackFormLead(data: LeadData): Promise<string> {
     event: "lead",
     event_id: eventId,
     form_name: data.formName,
-    lead_name: data.name,
-    lead_phone: data.phone,
-    lead_assunto: data.assunto,
     product_code: data.productCode,
     timestamp: new Date().toISOString(),
   });
-
-  // 2. Envio paralelo para Meta CAPI (Server-Side)
-  try {
-    fetch("/api/meta-capi", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        event_name: "Lead",
-        event_id: eventId,
-        event_source_url: typeof window !== "undefined" ? window.location.href : undefined,
-        user_data: {
-          name: data.name,
-          phone: data.phone,
-          email: data.email,
-        },
-        custom_data: {
-          form_name: data.formName,
-          assunto: data.assunto,
-          product_code: data.productCode,
-        },
-      }),
-    }).catch((err) => {
-      console.warn("[Meta CAPI] Erro em segundo plano ao enviar evento:", err);
-    });
-  } catch (err) {
-    console.warn("[Meta CAPI] Falha no disparo assíncrono:", err);
-  }
 
   return eventId;
 }

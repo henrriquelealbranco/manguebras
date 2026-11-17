@@ -19,6 +19,7 @@ export function ConsultarWhatsappButton({
   return (
     <a
       href={href}
+      data-gtm-tracked="true"
       target="_blank"
       rel="noopener noreferrer"
       onClick={() =>

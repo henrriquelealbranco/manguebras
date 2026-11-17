@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, MessageCircle, PackageSearch } from "lucide-react";
-import { whatsappLink } from "@/constants/site";
+import { productWhatsappLink } from "@/constants/site";
 import type { Product } from "@/types/product";
 
 interface ProductCardProps {
@@ -66,9 +66,11 @@ export function ProductCard({ product }: ProductCardProps) {
             <ArrowRight className="h-3.5 w-3.5" />
           </Link>
           <a
-            href={whatsappLink(
-              `Olá! Tenho interesse na peça: ${product.name} (Cód. ${product.code}). Podem me passar mais informações?`,
-            )}
+            href={productWhatsappLink()}
+            data-product-code={product.code}
+            data-product-name={product.name}
+            data-montadora={product.montadora}
+            data-click-location="product_card"
             target="_blank"
             rel="noopener noreferrer"
             className="flex min-h-9 w-full items-center justify-center gap-2 rounded-sm border border-brand-700 py-2 text-[11px] font-bold uppercase tracking-widest text-brand-800 transition-colors duration-200 hover:bg-brand-900 hover:text-white active:bg-brand-950"

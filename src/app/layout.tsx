@@ -10,6 +10,7 @@ import {
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { SITE } from "@/constants/site";
+import { SiteEvents } from "@/components/shared/site-events";
 import "./globals.css";
 
 const inter = Inter({
@@ -76,6 +77,7 @@ export default function RootLayout({
           state={SITE.address.state}
         />
         <Analytics />
+        <SiteEvents />
         <TooltipProvider delayDuration={200}>
           <Navbar />
           <main className="flex-1">{children}</main>

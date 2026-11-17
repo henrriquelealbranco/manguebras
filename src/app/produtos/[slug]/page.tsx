@@ -18,7 +18,7 @@ import { getProductBySlug, PRODUCTS } from "@/data/products";
 import { getCategory } from "@/data/categories";
 import { montadoraSlug, relatedProductsFor } from "@/lib/catalog";
 import { cn } from "@/lib/utils";
-import { SITE, whatsappLink } from "@/constants/site";
+import { SITE, productWhatsappLink } from "@/constants/site";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -108,9 +108,7 @@ export default async function ProdutoPage({ params }: PageProps) {
     ...(category ? { category: category.name } : {}),
   };
 
-  const consultaHref = whatsappLink(
-    `Olá! Tenho interesse na peça: ${product.name} (Cód. ${product.code}). Podem me passar disponibilidade e mais informações?`,
-  );
+  const consultaHref = productWhatsappLink();
 
   return (
     <>

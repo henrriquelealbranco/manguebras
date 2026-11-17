@@ -14,6 +14,7 @@ export function WhatsAppFab() {
       href={whatsappLink(
         "Olá! Vim pelo site da Manguebras e preciso de ajuda com mangueiras.",
       )}
+      data-gtm-tracked="true"
       onClick={() =>
         trackWhatsAppClick({
           location: "floating_fab",
