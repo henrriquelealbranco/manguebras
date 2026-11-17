@@ -1,4 +1,5 @@
 import Script from "next/script";
+import { TINTIM_INITIALIZER } from "@/lib/tintim";
 
 /**
  * Integração global de rastreamento via Google Tag Manager (GTM).
@@ -11,6 +12,9 @@ export function Analytics() {
 
   return (
     <>
+      <Script id="tintim-pixel" strategy="afterInteractive">
+        {TINTIM_INITIALIZER}
+      </Script>
       <Script id="gtm" strategy="afterInteractive">
         {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],

@@ -32,10 +32,16 @@ Não marcar simultaneamente lead e whatsapp_click como a mesma conversão.
 
 ## Pixel Tintim
 
-Não foi encontrado snippet de pixel Tintim no código versionado nesta revisão.
-Links Tintim não substituem o pixel. O script oficial específico desta conta
-deve ser fornecido pelo gestor ou confirmado no container GTM; não inferir um
-pixel a partir do UUID do link. Publicá-lo pelo GTM conforme instruções Tintim.
+Snippet oficial recebido do cliente e instalado globalmente em Analytics,
+com o script `https://s.tintim.app/static/core/tintim-1.0.js` e a conta
+`893db8f7-97bb-43b2-a908-97fc95741ca0`. Inicialização assíncrona, uma vez por
+documento, preservada na navegação interna. O código da conta é definido antes
+de anexar o script; as variáveis auxiliares não vazam para o escopo global.
+
+O pixel Tintim está diretamente no site; GA4, Meta e Google Ads seguem no GTM.
+Não instalar também o pixel Tintim no GTM, para evitar duplicação. Para migrar
+sua gestão para o GTM, remover primeiro a inclusão direta do site e validar a
+publicação da tag oficial no container. Links Tintim não substituem o pixel.
 
 Validar no Tag Assistant: container carregado, um evento por clique, contexto
 do produto correto, navegação interna e ausência de dados pessoais. Confirmar
