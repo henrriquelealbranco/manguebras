@@ -5,29 +5,16 @@ import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Search } from "lucide-react";
 import { CATEGORIES } from "@/data/categories";
-import { PRODUCTS } from "@/data/products";
+import { queryProducts } from "@/lib/catalog";
 import { cn } from "@/lib/utils";
 import type { Product } from "@/types/product";
 
 const MAX_RESULTS = 6;
 
-function normalize(text: string): string {
-  return text
-    .normalize("NFD")
-    .replace(/[̀-ͯ]/g, "")
-    .toLowerCase();
-}
-
 function searchLocal(query: string): Product[] {
-  const q = normalize(query.trim());
+  const q = query.trim();
   if (q.length < 2) return [];
-  const terms = q.split(/\s+/);
-  return PRODUCTS.filter((p) => {
-    const haystack = normalize(
-      `${p.name} ${p.code} ${p.montadora} ${p.ficha.montadora} ${p.ficha.aplicacao}`,
-    );
-    return terms.every((t) => haystack.includes(t));
-  }).slice(0, MAX_RESULTS);
+  return queryProducts({ q, ordenar: "relevancia" }).slice(0, MAX_RESULTS);
 }
 
 /**

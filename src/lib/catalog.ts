@@ -96,6 +96,14 @@ export function parseCatalogParams(params: RawParams): CatalogQuery {
   return { q, categoria, montadora, linha, ordenar };
 }
 
+/** Zeros iniciais são equivalentes apenas em SKUs inteiramente numéricos. */
+function numericSku(value: string): string | undefined {
+  const trimmed = value.trim();
+  return /^\d+$/.test(trimmed)
+    ? trimmed.replace(/^0+(?=\d)/, "")
+    : undefined;
+}
+
 function matchesQuery(product: Product, q: string): boolean {
   const needle = normalize(q);
   const haystack = normalize(
@@ -135,6 +143,19 @@ function sortProducts(products: Product[], sort: SortKey): Product[] {
 export function queryProducts(query: CatalogQuery): Product[] {
   let result = PRODUCTS;
 
+  const q = query.q?.trim();
+  if (q) {
+    const sku = numericSku(q);
+    const exact = sku === undefined
+      ? []
+      : PRODUCTS.filter((p) => numericSku(p.code) === sku);
+    // Resolver no catálogo completo: filtros não devem reativar o fallback.
+    // OEM/texto usa a consulta original, sem retirar seus zeros ou pontuação.
+    result = exact.length > 0
+      ? exact
+      : PRODUCTS.filter((p) => matchesQuery(p, q));
+  }
+
   if (query.categoria) {
     result = result.filter((p) => p.category === query.categoria);
   }
@@ -144,10 +165,6 @@ export function queryProducts(query: CatalogQuery): Product[] {
   if (query.linha) {
     result = result.filter((p) => p.lines.includes(query.linha!));
   }
-  if (query.q) {
-    result = result.filter((p) => matchesQuery(p, query.q!));
-  }
-
   return sortProducts(result, query.ordenar);
 }
 
