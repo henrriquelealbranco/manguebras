@@ -27,6 +27,7 @@ import { Separator } from "@/components/ui/separator";
 import { CATEGORIES } from "@/data/categories";
 import { listMontadoras } from "@/lib/catalog";
 import { SITE, whatsappLink } from "@/constants/site";
+import { CatalogDownload } from "@/components/shared/catalog-download";
 
 const NAV_LINKS = [
   { href: "/", label: "Início" },
@@ -79,6 +80,11 @@ export function MobileMenu() {
               </li>
             ))}
           </ul>
+
+          <CatalogDownload
+            onClick={() => setOpen(false)}
+            className="my-3 flex items-center gap-3 rounded-lg bg-brand-800 px-3 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-700"
+          />
 
           <Accordion type="single" collapsible className="mt-2">
             <AccordionItem value="montadoras" className="border-none">

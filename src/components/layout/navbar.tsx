@@ -9,6 +9,7 @@ import {
   Truck,
 } from "lucide-react";
 import { Logo } from "@/components/shared/logo";
+import { CatalogDownload } from "@/components/shared/catalog-download";
 import { CategoriesMenu } from "@/components/layout/mega-menu";
 import { MobileMenu } from "@/components/layout/mobile-menu";
 import { SearchAutocomplete } from "@/components/search/search-autocomplete";
@@ -161,6 +162,7 @@ export function Navbar() {
               </Link>
             ))}
           </div>
+          <CatalogDownload className="ml-auto hidden shrink-0 items-center gap-2 rounded-md bg-brand-800 px-3.5 py-2.5 text-xs font-bold text-white transition-colors hover:bg-brand-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-700 lg:inline-flex" />
         </div>
       </nav>
     </>

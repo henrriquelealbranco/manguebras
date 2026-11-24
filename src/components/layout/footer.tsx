@@ -10,6 +10,7 @@ import {
   Truck,
 } from "lucide-react";
 import { Logo } from "@/components/shared/logo";
+import { CatalogDownload } from "@/components/shared/catalog-download";
 import {
   FacebookIcon,
   InstagramIcon,
@@ -140,6 +141,9 @@ export function Footer() {
             Institucional
           </h3>
           <ul className="space-y-1">
+            <li>
+              <CatalogDownload className="inline-flex items-center gap-2 py-1 text-sm text-brand-300 transition-colors hover:text-accent-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent-400" />
+            </li>
             {INSTITUTIONAL_LINKS.map((link) => (
               <li key={link.href}>
                 <Link
